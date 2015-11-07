@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.zip.Inflater;
 
 /**
  * Created by ricoklimpel on 07.11.15.
@@ -29,7 +28,6 @@ public class RVA_projectsAdapterClass
             super(itemView);
 
 
-            //Objecte aus dem Layout inizialisieren
             CV_projects = (CardView)itemView.findViewById(R.id.CV_projects);
             tV_cardContent_projects = (TextView)itemView
                     .findViewById(R.id.tV_CardContent_projects);
@@ -42,7 +40,6 @@ public class RVA_projectsAdapterClass
     public ViewHolderClass onCreateViewHolder(ViewGroup viewGroup, int i) {
 
 
-        //De, Recycler View das richtige Layout zuweisen
         View rv_item_projects = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.rv_item_projects, null);
 
@@ -53,10 +50,14 @@ public class RVA_projectsAdapterClass
     @Override
     public void onBindViewHolder(ViewHolderClass viewHolderClass, final int i) {
 
-
-        //Immer den richtigen Text aus dem Array anzeigen
         viewHolderClass.tV_cardContent_projects
                 .setText(ChooseProjektActivity.ArrayProjectObjects.get(i));
+
+        if (i == getItemCount()){
+            ChooseProjektActivity.FAM_Projects.setVisibility(View.VISIBLE);
+        }
+
+
 
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
