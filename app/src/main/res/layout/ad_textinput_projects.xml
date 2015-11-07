@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Projektnamen eingeben"
+        android:id="@+id/eT_AD_addprojects"
+        app:met_floatingLabel="highlight"
+        app:met_minCharacters="1"
+        app:met_maxCharacters="15"
+        android:layout_margin="20dp" />
+
+
+
+    <com.gc.materialdesign.views.ButtonFlat
+        android:id="@+id/btn_AD_addprojects"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#1E88E5"
+        android:layout_gravity="center_horizontal"
+        android:text="speichern"
+        android:layout_margin="10dp" />
+
+</LinearLayout>

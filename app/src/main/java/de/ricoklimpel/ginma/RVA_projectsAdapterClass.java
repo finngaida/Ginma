@@ -53,11 +53,6 @@ public class RVA_projectsAdapterClass
         viewHolderClass.tV_cardContent_projects
                 .setText(ChooseProjektActivity.ArrayProjectObjects.get(i));
 
-        if (i == getItemCount()){
-            ChooseProjektActivity.FAM_Projects.setVisibility(View.VISIBLE);
-        }
-
-
 
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +66,6 @@ public class RVA_projectsAdapterClass
 
     @Override
     public int getItemCount() {
-
-        //größe des Arrays abrufen um zu wissen wie lang die Liste wird.
         return ChooseProjektActivity.ArrayProjectObjects.size();
     }
 }
