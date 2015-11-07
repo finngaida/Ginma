@@ -18,6 +18,8 @@ public class SplashActivity extends AppCompatActivity {
 
         ImageView iV_SplashLogo = (ImageView)findViewById(R.id.iV_SplashLogo);
 
+
+        //Logoanimation
         AlphaAnimation animation2 = new AlphaAnimation(1.0f, 0.0f);
         animation2.setDuration(2000);
         animation2.setStartOffset(2000);
@@ -31,9 +33,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
 
+                //Pass to next Activity
                 Intent intent = new Intent(SplashActivity.this, ChooseProjektActivity.class);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
             }
 
