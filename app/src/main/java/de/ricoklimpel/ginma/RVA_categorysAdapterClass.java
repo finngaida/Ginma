@@ -1,7 +1,5 @@
 package de.ricoklimpel.ginma;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,22 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import static android.support.v4.app.ActivityCompat.startActivity;
-
 
 /**
  * Created by ricoklimpel on 07.11.15.
  */
 
-public class RVA_projectsAdapterClass
-        extends RecyclerView.Adapter<RVA_projectsAdapterClass.ViewHolderClass> {
+public class RVA_categorysAdapterClass
+        extends RecyclerView.Adapter<RVA_categorysAdapterClass.ViewHolderClass> {
 
 
     public class ViewHolderClass extends RecyclerView.ViewHolder {
 
 
-        CardView CV_projects;
-        TextView tV_cardContent_projects;
+        CardView CV_categorys;
+        TextView tV_cardContent_catergorys;
 
 
         public ViewHolderClass(View itemView) {
@@ -33,8 +29,8 @@ public class RVA_projectsAdapterClass
             super(itemView);
 
 
-            CV_projects = (CardView)itemView.findViewById(R.id.CV_projects);
-            tV_cardContent_projects = (TextView)itemView
+            CV_categorys = (CardView)itemView.findViewById(R.id.CV_projects);
+            tV_cardContent_catergorys = (TextView)itemView
                     .findViewById(R.id.tV_CardContent_projects);
 
         }
@@ -45,28 +41,25 @@ public class RVA_projectsAdapterClass
     public ViewHolderClass onCreateViewHolder(ViewGroup viewGroup, int i) {
 
 
-        View rv_item_projects = LayoutInflater.from(viewGroup.getContext())
+        View rv_item_categorys = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.rv_item_projects, null);
 
 
-        return new ViewHolderClass(rv_item_projects);
+        return new ViewHolderClass(rv_item_categorys);
     }
 
     @Override
     public void onBindViewHolder(ViewHolderClass viewHolderClass, final int i) {
 
-        viewHolderClass.tV_cardContent_projects
-                .setText(ChooseProjektActivity.ArrayProjectObjects.get(i));
+        viewHolderClass.tV_cardContent_catergorys
+                .setText(ChooseCategoryActivity.ArrayCategoryObjects.get(i));
 
 
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ChooseProjektActivity.USERS_PATH = ChooseProjektActivity.ArrayProjectObjects.get(i);
-
-                Intent categoryintent = new Intent(ChooseProjektActivity.CPA, ChooseCategoryActivity.class);
-                ChooseProjektActivity.CPA.startActivity(categoryintent);
+                //Weitergeben an Graph View
 
             }
         });
@@ -75,7 +68,7 @@ public class RVA_projectsAdapterClass
             @Override
             public boolean onLongClick(View v) {
 
-                ChooseProjektActivity.DeleteDialog(i,ChooseProjektActivity.CPA);
+                ChooseCategoryActivity.DeleteDialog(i, ChooseCategoryActivity.CCA_ActivityContent);
 
                 return false;
             }
@@ -86,6 +79,6 @@ public class RVA_projectsAdapterClass
 
     @Override
     public int getItemCount() {
-        return ChooseProjektActivity.ArrayProjectObjects.size();
+        return ChooseCategoryActivity.ArrayCategoryObjects.size();
     }
 }

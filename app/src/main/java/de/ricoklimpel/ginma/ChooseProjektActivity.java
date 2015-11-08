@@ -25,14 +25,15 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
     static Activity CPA;
 
+    //Sagt an in welchen "Verzeichnis" sich der Nutzer gerade aufhält
+    static String USERS_PATH;
+
     RecyclerView RV_projects;
     static RecyclerView.Adapter RVA_projects;
     RecyclerView.LayoutManager RVLM_projects;
 
+
     FloatingActionButton FAB_Help;
-
-
-
     FloatingActionButton FAB_Plus;
     static FloatingActionsMenu FAM_Projects;
 
@@ -55,6 +56,17 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);
         FAB_Help = (FloatingActionButton)findViewById(R.id.FAB_help);
+        FAB_Help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ChooseProjektActivity.this, HelpActvity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+            }
+        });
+
         FAB_Plus = (FloatingActionButton)findViewById(R.id.FAB_plus);
         FAB_Plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,12 +101,12 @@ public class ChooseProjektActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (eT_AD_addproject.getText().toString() != ""){
-                    if (eT_AD_addproject.length()>=15){
+                if (eT_AD_addproject.getText().toString() != "") {
+                    if (eT_AD_addproject.length() > 20) {
 
                         //Flash Button red or something?
 
-                    }else{
+                    } else {
 
                         ArrayProjectObjects.add(eT_AD_addproject.getText().toString());
                         RVA_projects.notifyDataSetChanged();
@@ -194,4 +206,11 @@ public class ChooseProjektActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+        System.exit(0);
+
+        super.onBackPressed();
+    }
 }

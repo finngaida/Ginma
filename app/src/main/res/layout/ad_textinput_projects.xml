@@ -13,7 +13,7 @@
         android:id="@+id/eT_AD_addprojects"
         app:met_floatingLabel="highlight"
         app:met_minCharacters="1"
-        app:met_maxCharacters="15"
+        app:met_maxCharacters="20"
         android:layout_margin="20dp" />
 
 
