@@ -1,42 +1,32 @@
 package de.ricoklimpel.ginma;
 
-import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.internal.view.ContextThemeWrapper;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.gc.materialdesign.views.ButtonFlat;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+
 
 public class ChooseProjektActivity extends AppCompatActivity {
 
+    static Activity CPA;
+
     RecyclerView RV_projects;
-    RecyclerView.Adapter RVA_projects;
+    static RecyclerView.Adapter RVA_projects;
     RecyclerView.LayoutManager RVLM_projects;
 
     FloatingActionButton FAB_Help;
@@ -61,9 +51,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_projekt);
 
-
-
-
+        CPA = this;
 
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);
         FAB_Help = (FloatingActionButton)findViewById(R.id.FAB_help);
@@ -109,6 +97,9 @@ public class ChooseProjektActivity extends AppCompatActivity {
                     }else{
 
                         ArrayProjectObjects.add(eT_AD_addproject.getText().toString());
+                        RVA_projects.notifyDataSetChanged();
+                        RV_projects.smoothScrollToPosition(ArrayProjectObjects.size());
+
                         AD_addProject.dismiss();
                     }
 
@@ -154,6 +145,31 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
         RVA_projects = new RVA_projectsAdapterClass();
         RV_projects.setAdapter(RVA_projects);
+    }
+
+
+    static public void DeleteDialog(final int i, Activity activity){
+        new AlertDialog.Builder(activity)
+                .setTitle("Projekt löschen")
+                .setMessage("Bist du dir sicher das '" +
+                        ChooseProjektActivity.ArrayProjectObjects.get(i) +
+                        "' und sämtliche Daten in diesem Projekt gelöscht werden soll?")
+
+                .setPositiveButton("löschen", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        ChooseProjektActivity.ArrayProjectObjects.remove(i);
+                        RVA_projects.notifyDataSetChanged();
+
+                    }
+                })
+                .setNegativeButton("abbrechen", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setIcon(R.drawable.ic_warning_black_36dp)
+                .show();
     }
 
 

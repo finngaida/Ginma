@@ -1,5 +1,7 @@
 package de.ricoklimpel.ginma;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,6 +60,16 @@ public class RVA_projectsAdapterClass
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        viewHolderClass.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+
+                ChooseProjektActivity.DeleteDialog(i,ChooseProjektActivity.CPA);
+
+                return false;
             }
         });
 
