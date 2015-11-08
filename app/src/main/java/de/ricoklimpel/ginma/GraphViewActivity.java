@@ -1,11 +1,12 @@
 package de.ricoklimpel.ginma;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class GraphViewActivity extends AppCompatActivity {
+public class GraphViewActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

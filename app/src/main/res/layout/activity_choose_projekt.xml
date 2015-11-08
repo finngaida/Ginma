@@ -5,7 +5,8 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/RL_projects"
 
-    tools:context="de.ricoklimpel.ginma.ChooseProjektActivity">
+    tools:context="de.ricoklimpel.ginma.ChooseProjektActivity"
+    android:background="#F57C00">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="fill_parent"

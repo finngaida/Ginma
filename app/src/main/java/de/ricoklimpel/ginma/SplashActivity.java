@@ -1,5 +1,6 @@
 package de.ricoklimpel.ginma;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +22,8 @@ public class SplashActivity extends AppCompatActivity {
 
         //Logoanimation
         AlphaAnimation animation2 = new AlphaAnimation(1.0f, 0.0f);
-        animation2.setDuration(2000);
-        animation2.setStartOffset(2000);
+        animation2.setDuration(1000);
+        animation2.setStartOffset(1000);
         animation2.setFillAfter(true);
         animation2.setAnimationListener(new Animation.AnimationListener() {
             @Override

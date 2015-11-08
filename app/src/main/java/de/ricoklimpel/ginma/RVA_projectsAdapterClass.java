@@ -2,12 +2,15 @@ package de.ricoklimpel.ginma;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 
 /**
@@ -59,6 +62,9 @@ public class RVA_projectsAdapterClass
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent categoryintent = new Intent(ChooseProjektActivity.CPA, ChooseCategoryActivity.class);
+                ChooseProjektActivity.CPA.startActivity(categoryintent);
 
             }
         });
