@@ -5,11 +5,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.gc.materialdesign.views.ButtonFlat;
@@ -23,7 +28,7 @@ import java.util.Arrays;
 
 public class ChooseProjektActivity extends AppCompatActivity {
 
-    static Activity CPA;
+    static Activity CPA_activityContent;
 
     //Sagt an in welchen "Verzeichnis" sich der Nutzer gerade aufhält
     static String USERS_PATH;
@@ -39,20 +44,31 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
     static ArrayList<String> ArrayProjectObjects;
 
-
     ButtonFlat btn_AD_addproject;
     MaterialEditText eT_AD_addproject;
 
-
     SharedPreferences prefs;
     SharedPreferences.Editor prefseditor;
+
+    Toolbar toolbar_chooseproject;
+    ActionBar actionbar_chooseproject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_projekt);
+        CPA_activityContent = this;
 
-        CPA = this;
+
+        toolbar_chooseproject = (Toolbar)findViewById(R.id.Toolbar_ChooseProject);
+        setSupportActionBar(toolbar_chooseproject);
+        toolbar_chooseproject.setTitle("Projekte");
+        if(Build.VERSION.SDK_INT>=21){
+            toolbar_chooseproject.setElevation(25);
+        }
+        //actionbar_chooseproject = getSupportActionBar();
+        //actionbar_chooseproject.setDisplayHomeAsUpEnabled(true);
+
 
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);
         FAB_Help = (FloatingActionButton)findViewById(R.id.FAB_help);
@@ -213,4 +229,32 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
         super.onBackPressed();
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_choose_projekt, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        /*if (id == R.id.action_settings) {
+            return true;
+        }*/
+        if(id == android.R.id.home) {
+            onBackPressed();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
+
