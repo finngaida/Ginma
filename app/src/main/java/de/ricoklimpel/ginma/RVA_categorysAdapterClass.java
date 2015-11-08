@@ -29,9 +29,9 @@ public class RVA_categorysAdapterClass
             super(itemView);
 
 
-            CV_categorys = (CardView)itemView.findViewById(R.id.CV_projects);
+            CV_categorys = (CardView)itemView.findViewById(R.id.CV_categorys);
             tV_cardContent_catergorys = (TextView)itemView
-                    .findViewById(R.id.tV_CardContent_projects);
+                    .findViewById(R.id.tV_CardContent_categorys);
 
         }
 
@@ -42,7 +42,7 @@ public class RVA_categorysAdapterClass
 
 
         View rv_item_categorys = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.rv_item_projects, null);
+                .inflate(R.layout.rv_item_categorys, null);
 
 
         return new ViewHolderClass(rv_item_categorys);

@@ -3,13 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="de.ricoklimpel.ginma.HelpActvity">
 
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Toolbar_Help"
+        android:background="@color/primary">
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.DrawerLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:id="@+id/DrawerLayout_Help"
+        android:layout_below="@+id/Toolbar_Help">
+
+        <!--Activity Layout-->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/RL_HelpActivity">
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity Layout!"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:gravity="center" />
+
+
+        </RelativeLayout>
+
+
+        <!--Drawer Layout-->
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_HelpDrawer"
+            android:layout_gravity="start"
+            android:background="@color/secondary_text">
+
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Drawer Layout"
+                android:layout_centerVertical="true"
+                android:gravity="center" />
+
+
+        </RelativeLayout>
+
+
+    </android.support.v4.widget.DrawerLayout>
 
 
 </RelativeLayout>

@@ -60,6 +60,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
         CPA_activityContent = this;
 
 
+
         toolbar_chooseproject = (Toolbar)findViewById(R.id.Toolbar_ChooseProject);
         setSupportActionBar(toolbar_chooseproject);
         toolbar_chooseproject.setTitle("Projekte");
@@ -225,9 +226,10 @@ public class ChooseProjektActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        System.exit(0);
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
 
-        super.onBackPressed();
     }
 
 
