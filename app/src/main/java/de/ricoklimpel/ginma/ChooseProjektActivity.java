@@ -3,6 +3,7 @@ package de.ricoklimpel.ginma;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,8 +26,12 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ChooseProjektActivity extends AppCompatActivity {
 
@@ -35,6 +40,9 @@ public class ChooseProjektActivity extends AppCompatActivity {
     RecyclerView.LayoutManager RVLM_projects;
 
     FloatingActionButton FAB_Help;
+
+
+
     FloatingActionButton FAB_Plus;
     static FloatingActionsMenu FAM_Projects;
 
@@ -54,24 +62,10 @@ public class ChooseProjektActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_projekt);
 
 
+
+
+
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);
-
-        ArrayProjectObjects = new ArrayList<>();
-
-        ArrayProjectObjects.addAll(Arrays.asList("hallo", "hallo2", "hallo3", "hallo2"
-                , "hallo3", "hallo2", "hallo3", "hallo2", "hallo3", "hallo2", "hallo3"
-                , "hallo2", "hallo3", "hallo2", "hallo3"));
-
-        RV_projects = (RecyclerView)findViewById(R.id.RV_projects);
-        RVLM_projects = new LinearLayoutManager(this);
-
-        RV_projects.setLayoutManager(RVLM_projects);
-
-        RVA_projects = new RVA_projectsAdapterClass();
-        RV_projects.setAdapter(RVA_projects);
-
-
-
         FAB_Help = (FloatingActionButton)findViewById(R.id.FAB_help);
         FAB_Plus = (FloatingActionButton)findViewById(R.id.FAB_plus);
         FAB_Plus.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +118,63 @@ public class ChooseProjektActivity extends AppCompatActivity {
         });
 
         AD_addProject.show();
+    }
+
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
+        prefseditor = prefs.edit();
+
+        prefseditor.putString("projects", convertToString(ArrayProjectObjects));
+        prefseditor.commit();
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ArrayProjectObjects = new ArrayList<>();
+
+
+        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
+        String stringback =  prefs.getString("projects","");
+
+        ArrayProjectObjects.addAll(Arrays.asList(stringback.split(","))) ;
+
+        RV_projects = (RecyclerView)findViewById(R.id.RV_projects);
+        RVLM_projects = new LinearLayoutManager(this);
+
+        RV_projects.setLayoutManager(RVLM_projects);
+
+        RVA_projects = new RVA_projectsAdapterClass();
+        RV_projects.setAdapter(RVA_projects);
+    }
+
+
+    private String convertToString(ArrayList<String> list) {
+
+        StringBuilder sb = new StringBuilder();
+        String delim = "";
+        for (String s : list)
+        {
+            sb.append(delim);
+            sb.append(s);;
+            delim = ",";
+        }
+        return sb.toString();
+    }
+
+
+    private ArrayList<String> convertToArray(String string) {
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(string.split(",")));
+        return list;
     }
 
 
