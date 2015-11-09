@@ -1,6 +1,7 @@
 package de.ricoklimpel.ginma;
 
 import android.content.res.Configuration;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,6 +18,7 @@ public class HelpActvity extends AppCompatActivity {
     ActionBarDrawerToggle DrawerToggle;
     Toolbar Toolbar_Help;
     ActionBar Actionbar_Help;
+    NavigationView help_navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,34 @@ public class HelpActvity extends AppCompatActivity {
         DrawerLayout_Help = (DrawerLayout)findViewById(R.id.DrawerLayout_Help);
         DrawerToggle = new ActionBarDrawerToggle(HelpActvity.this,DrawerLayout_Help,R.string.app_name,R.string.app_name);
         DrawerLayout_Help.setDrawerListener(DrawerToggle);
+
+        help_navigationView = (NavigationView)findViewById(R.id.help_navigationView);
+        help_navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                switch(menuItem.getItemId()){
+
+                    case R.id.menuitem_procat:{
+
+                        break;
+                    }
+                    case R.id.menuitem_graphs:{
+
+                        break;
+                    }
+                    case  R.id.menuitem_developer:{
+
+                        break;
+                    }
+                }
+
+                DrawerLayout_Help.closeDrawers();
+                menuItem.setCheckable(true);
+
+                return false;
+            }
+        });
 
     }
 

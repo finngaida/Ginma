@@ -16,8 +16,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
-import com.gc.materialdesign.views.ButtonFlat;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -41,7 +41,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     static ArrayList<String> ArrayCategoryObjects;
 
 
-    ButtonFlat btn_AD_addcategory;
+    Button btn_AD_addcategory;
     MaterialEditText eT_AD_addcategory;
 
 
@@ -106,7 +106,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         AD_addProjectbuilder.setTitle("Neue Kategorie hinzufügen");
         AD_addProjectbuilder.setView(AD_View);
 
-        btn_AD_addcategory = (ButtonFlat)AD_View.findViewById(R.id.btn_AD_addprojects);
+        btn_AD_addcategory = (Button)AD_View.findViewById(R.id.btn_AD_addprojects);
         eT_AD_addcategory = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addprojects);
 
         final AlertDialog AD_addProject = AD_addProjectbuilder.create();

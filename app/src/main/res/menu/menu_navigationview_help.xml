@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/menuitem_procat"
+            android:title="Projekte/Kategorien"
+            android:icon="@drawable/ic_assignment_black_36dp"
+            />
+
+        <item
+            android:id="@+id/menuitem_graphs"
+            android:title="Graphen"
+            android:icon="@drawable/ic_equalizer_black_36dp"
+            />
+
+        <item
+            android:id="@+id/menuitem_developer"
+            android:title="Der Entwickler"
+            android:icon="@drawable/ic_person_pin_black_36dp"
+            />
+
+    </group>
+
+</menu>

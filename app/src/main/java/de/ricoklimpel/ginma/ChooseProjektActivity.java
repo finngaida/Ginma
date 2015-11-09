@@ -16,8 +16,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
-import com.gc.materialdesign.views.ButtonFlat;
+
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -44,7 +45,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
     static ArrayList<String> ArrayProjectObjects;
 
-    ButtonFlat btn_AD_addproject;
+    Button btn_AD_addproject;
     MaterialEditText eT_AD_addproject;
 
     SharedPreferences prefs;
@@ -109,7 +110,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
         AD_addProjectbuilder.setTitle("Neues Projekt hinzufügen");
         AD_addProjectbuilder.setView(AD_View);
 
-        btn_AD_addproject = (ButtonFlat)AD_View.findViewById(R.id.btn_AD_addprojects);
+        btn_AD_addproject = (Button)AD_View.findViewById(R.id.btn_AD_addprojects);
         eT_AD_addproject = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addprojects);
 
         final AlertDialog AD_addProject = AD_addProjectbuilder.create();
