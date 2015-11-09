@@ -2,8 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="150dp">
@@ -13,14 +11,12 @@
         android:layout_width="fill_parent"
         android:layout_height="130dp"
         android:id="@+id/CV_projects"
-        app:cardCornerRadius="10dp"
-        android:background="@color/accent"
-        android:backgroundTint="@color/accent"
+        app:cardCornerRadius="2dp"
         android:layout_gravity="center_horizontal"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_margin="10dp"
-        android:elevation="25dp">
+        android:elevation="8dp">
 
 
         <TextView

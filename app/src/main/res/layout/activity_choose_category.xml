@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_icon="@drawable/ic_add_black_24dp"
-            fab:fab_title="Projekt hinzufügen"
+            fab:fab_title="Kategorie hinzufügen"
             fab:fab_colorPressed="@color/white_pressed"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

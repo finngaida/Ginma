@@ -14,7 +14,7 @@
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:id="@+id/CV_categorys"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="2dp"
         android:background="@color/accent"
         android:backgroundTint="@color/accent"
         android:layout_gravity="center_horizontal"
@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:layout_margin="10dp"
-        android:elevation="25dp">
+        android:elevation="40dp">
 
 
         <TextView

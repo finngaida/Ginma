@@ -61,6 +61,10 @@ public class RVA_categorysAdapterClass
 
                 //Weitergeben an Graph View
 
+
+                Intent categoryintent = new Intent(ChooseCategoryActivity.CCA_ActivityContent, GraphViewActivity.class);
+                ChooseCategoryActivity.CCA_ActivityContent.startActivity(categoryintent);
+
             }
         });
 
