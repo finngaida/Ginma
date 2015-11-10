@@ -50,8 +50,8 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     MaterialEditText eT_AD_addcategory;
 
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor prefseditor;
+    static SharedPreferences prefs;
+    static SharedPreferences.Editor prefseditor;
 
 
     Toolbar toolbar_choosecategory;
@@ -223,6 +223,14 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
                 .setPositiveButton("löschen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+
+
+                        prefs = CCA_ActivityContent.getSharedPreferences(
+                                String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+                        prefs.edit().remove("dates_CID_"+String.valueOf(i)).commit();
+                        prefs.edit().remove("values_CID_"+String.valueOf(i)).commit();
+                        prefs.edit().remove("notes_CID_"+String.valueOf(i)).commit();
+                        
 
                         ChooseCategoryActivity.ArrayCategoryNames.remove(i);
                         RVA_categorys.notifyDataSetChanged();
