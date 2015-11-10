@@ -1,8 +1,6 @@
 package de.ricoklimpel.ginma;
 
-import android.app.Activity;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -10,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TableLayout;
 
 
 public class GraphViewActivity extends AppCompatActivity {
@@ -27,7 +24,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         toolbar_graphview = (Toolbar) findViewById(R.id.Toolbar_GraphView);
         setSupportActionBar(toolbar_graphview);
-        toolbar_graphview.setSubtitle(ChooseProjektActivity.USERS_PATH);
+        toolbar_graphview.setSubtitle(ChooseProjektActivity.Projekt_ID);
 
         actionbar_graphview = getSupportActionBar();
         actionbar_graphview.setDisplayHomeAsUpEnabled(true);

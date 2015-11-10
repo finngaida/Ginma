@@ -52,14 +52,14 @@ public class RVA_projectsAdapterClass
     public void onBindViewHolder(ViewHolderClass viewHolderClass, final int i) {
 
         viewHolderClass.tV_cardContent_projects
-                .setText(ChooseProjektActivity.ArrayProjectObjects.get(i));
+                .setText(ChooseProjektActivity.ArrayProjectNames.get(i));
 
 
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                ChooseProjektActivity.USERS_PATH = ChooseProjektActivity.ArrayProjectObjects.get(i);
+                ChooseProjektActivity.Projekt_ID = "ID_"+String.valueOf(i);
 
                 Intent categoryintent = new Intent(ChooseProjektActivity.CPA_activityContent, ChooseCategoryActivity.class);
                 ChooseProjektActivity.CPA_activityContent.startActivity(categoryintent);
@@ -82,6 +82,6 @@ public class RVA_projectsAdapterClass
 
     @Override
     public int getItemCount() {
-        return ChooseProjektActivity.ArrayProjectObjects.size();
+        return ChooseProjektActivity.ArrayProjectNames.size();
     }
 }

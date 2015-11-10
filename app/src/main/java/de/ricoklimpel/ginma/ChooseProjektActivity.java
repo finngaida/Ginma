@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,26 +31,41 @@ public class ChooseProjektActivity extends AppCompatActivity {
     static Activity CPA_activityContent;
 
     //Sagt an in welchen "Verzeichnis" sich der Nutzer gerade aufhält
-    static String USERS_PATH;
+    static String Projekt_ID;
+
 
     RecyclerView RV_projects;
     static RecyclerView.Adapter RVA_projects;
     RecyclerView.LayoutManager RVLM_projects;
 
 
+    //Button zum aufrufen der Hilfe und hinzufügen eiens Neuen Projektes
     FloatingActionButton FAB_Help;
     FloatingActionButton FAB_Plus;
     static FloatingActionsMenu FAM_Projects;
 
-    static ArrayList<String> ArrayProjectObjects;
 
+    //Liste der Projektnamen, die in die Card Views geladen werden
+    static ArrayList<String> ArrayProjectNames;
+
+    String Projekt_quantity;
+
+
+    //Bedienelemente im "Neues Projekt" Dialog
     Button btn_AD_addproject;
     MaterialEditText eT_AD_addproject;
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor prefseditor;
+
+    SharedPreferences prefs_values;
+    SharedPreferences.Editor prefseditor_values;
+
+    static SharedPreferences prefs_cat;
+    static SharedPreferences.Editor prefseditor_cat;
 
     Toolbar toolbar_chooseproject;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +75,40 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
 
+        prefs_values = this.getSharedPreferences("values", MODE_PRIVATE);
+        String first_start =  prefs_values.getString("first_start","");
+
+        if(first_start == ""){
+
+            prefs_values = this.getSharedPreferences("values", MODE_PRIVATE);
+            prefseditor_values = prefs_values.edit();
+
+            prefseditor_values.putString("first_start", "false");
+            prefseditor_values.commit();
+
+        }else{
+
+        }
+
+
+        Init_Toolbar();
+
+        Init_FabMenu();
+
+
+    }
+
+    private void Init_Toolbar() {
         toolbar_chooseproject = (Toolbar)findViewById(R.id.Toolbar_ChooseProject);
         setSupportActionBar(toolbar_chooseproject);
         toolbar_chooseproject.setTitle("Projekte");
         if(Build.VERSION.SDK_INT>=21){
             toolbar_chooseproject.setElevation(25);
         }
+    }
 
 
+    private void Init_FabMenu() {
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);
         FAB_Help = (FloatingActionButton)findViewById(R.id.FAB_help);
         FAB_Help.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +131,6 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
 
@@ -123,9 +161,11 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
                     } else {
 
-                        ArrayProjectObjects.add(eT_AD_addproject.getText().toString());
+                        addProjekt();
+
+
                         RVA_projects.notifyDataSetChanged();
-                        RV_projects.smoothScrollToPosition(ArrayProjectObjects.size());
+                        RV_projects.smoothScrollToPosition(ArrayProjectNames.size());
 
                         AD_addProject.dismiss();
                     }
@@ -140,15 +180,40 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
 
+    private void addProjekt() {
+
+        ArrayProjectNames.add(eT_AD_addproject.getText().toString());
+
+        prefs_values = this.getSharedPreferences("values", MODE_PRIVATE);
+        prefseditor_values = prefs_values.edit();
+
+        prefseditor_values.putString("project_names", convertToString(ArrayProjectNames));
+        prefseditor_values.commit();
+
+
+
+
+
+        prefs_cat = this.getSharedPreferences("ID_" + String.valueOf(ArrayProjectNames.size()-1), MODE_PRIVATE);
+        prefseditor_cat = prefs_cat.edit();
+
+        prefseditor_cat.putString("category_names", "");
+        prefseditor_cat.commit();
+
+
+    }
+
+
     @Override
     protected void onPause() {
         super.onPause();
 
-        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
-        prefseditor = prefs.edit();
+        prefs_values = this.getSharedPreferences("values", MODE_PRIVATE);
+        prefseditor_values = prefs_values.edit();
 
-        prefseditor.putString("projects", convertToString(ArrayProjectObjects));
-        prefseditor.commit();
+        prefseditor_values.putString("project_names", convertToString(ArrayProjectNames));
+        prefseditor_values.putInt("project_quantity", ArrayProjectNames.size());
+        prefseditor_values.commit();
 
     }
 
@@ -157,13 +222,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ArrayProjectObjects = new ArrayList<>();
-
-
-        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
-        String stringback =  prefs.getString("projects","");
-
-        ArrayProjectObjects.addAll(Arrays.asList(stringback.split(","))) ;
+        loadProjektnameArray();
 
         RV_projects = (RecyclerView)findViewById(R.id.RV_projects);
         RVLM_projects = new LinearLayoutManager(this);
@@ -175,17 +234,35 @@ public class ChooseProjektActivity extends AppCompatActivity {
     }
 
 
+    private void loadProjektnameArray() {
+        ArrayProjectNames = new ArrayList<>();
+
+        prefs_values = this.getSharedPreferences("values", MODE_PRIVATE);
+        String stringback =  prefs_values.getString("project_names","");
+
+        if(stringback!=""){
+            ArrayProjectNames.addAll(Arrays.asList(stringback.split(","))) ;
+        }
+
+    }
+
+
     static public void DeleteDialog(final int i, Activity activity){
         new AlertDialog.Builder(activity)
                 .setTitle("Projekt löschen")
                 .setMessage("Bist du dir sicher das '" +
-                        ChooseProjektActivity.ArrayProjectObjects.get(i) +
+                        ChooseProjektActivity.ArrayProjectNames.get(i) +
                         "' und sämtliche Daten in diesem Projekt gelöscht werden soll?")
 
                 .setPositiveButton("löschen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ChooseProjektActivity.ArrayProjectObjects.remove(i);
+                        prefs_cat = CPA_activityContent.getSharedPreferences(
+                                "ID_" + String.valueOf(i), MODE_PRIVATE);
+                        prefs_cat.edit().clear().commit();
+
+
+                        ChooseProjektActivity.ArrayProjectNames.remove(i);
                         RVA_projects.notifyDataSetChanged();
 
                     }
@@ -224,6 +301,8 @@ public class ChooseProjektActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+        onPause();
+
         moveTaskToBack(true);
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(1);
@@ -249,6 +328,8 @@ public class ChooseProjektActivity extends AppCompatActivity {
         /*if (id == R.id.action_settings) {
             return true;
         }*/
+
+        //Zurückbutton in der Toolbaa
         if(id == android.R.id.home) {
             onBackPressed();
         }

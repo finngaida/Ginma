@@ -62,7 +62,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
         toolbar_choosecategory = (Toolbar)findViewById(R.id.Toolbar_ChooseCategory);
         setSupportActionBar(toolbar_choosecategory);
-        toolbar_choosecategory.setSubtitle(ChooseProjektActivity.USERS_PATH.toUpperCase());
+        toolbar_choosecategory.setSubtitle(ChooseProjektActivity.Projekt_ID.toUpperCase());
         if(Build.VERSION.SDK_INT>=21){
             toolbar_choosecategory.setElevation(25);
         }
@@ -146,7 +146,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
         prefseditor = prefs.edit();
 
-        prefseditor.putString(ChooseProjektActivity.USERS_PATH, convertToString(ArrayCategoryObjects));
+        prefseditor.putString(ChooseProjektActivity.Projekt_ID, convertToString(ArrayCategoryObjects));
         prefseditor.commit();
 
     }
@@ -160,7 +160,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
 
         prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
-        String stringback =  prefs.getString(ChooseProjektActivity.USERS_PATH,"");
+        String stringback =  prefs.getString(ChooseProjektActivity.Projekt_ID,"");
 
         if(stringback!=""){
             ArrayCategoryObjects.addAll(Arrays.asList(stringback.split(","))) ;
