@@ -1,13 +1,19 @@
 package de.ricoklimpel.ginma;
 
+import android.app.Activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class GraphViewActivity extends AppCompatActivity {
@@ -17,10 +23,14 @@ public class GraphViewActivity extends AppCompatActivity {
     TabLayout tablyout_graphview;
     ActionBar actionbar_graphview;
 
+    static Activity CGV_activityContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph_view);
+        CGV_activityContent = this;
+
 
         toolbar_graphview = (Toolbar) findViewById(R.id.Toolbar_GraphView);
         setSupportActionBar(toolbar_graphview);
@@ -59,6 +69,8 @@ public class GraphViewActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 

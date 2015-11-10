@@ -230,7 +230,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
                         prefs.edit().remove("dates_CID_"+String.valueOf(i)).commit();
                         prefs.edit().remove("values_CID_"+String.valueOf(i)).commit();
                         prefs.edit().remove("notes_CID_"+String.valueOf(i)).commit();
-                        
+
 
                         ChooseCategoryActivity.ArrayCategoryNames.remove(i);
                         RVA_categorys.notifyDataSetChanged();
