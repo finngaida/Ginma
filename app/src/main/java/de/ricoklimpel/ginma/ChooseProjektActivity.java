@@ -52,7 +52,6 @@ public class ChooseProjektActivity extends AppCompatActivity {
     SharedPreferences.Editor prefseditor;
 
     Toolbar toolbar_chooseproject;
-    ActionBar actionbar_chooseproject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +67,6 @@ public class ChooseProjektActivity extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=21){
             toolbar_chooseproject.setElevation(25);
         }
-        //actionbar_chooseproject = getSupportActionBar();
-        //actionbar_chooseproject.setDisplayHomeAsUpEnabled(true);
 
 
         FAM_Projects = (FloatingActionsMenu)findViewById(R.id.FAM_projects);

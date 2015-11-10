@@ -4,9 +4,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_choose_projekt">Projekte</string>
     <string name="title_activity_choose_category">Kategorien</string>
-    <string name="title_activity_graph_view">GraphViewActivity</string>
-    <string name="title_activity_help_actvity">HelpActvity</string>
+    <string name="title_activity_graph_view">Detail Ansicht</string>
+    <string name="title_activity_help_actvity">Hilfe</string>
 
-    <string name="hello_world">Hello world!</string>
 
 </resources>

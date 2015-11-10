@@ -11,6 +11,11 @@
             />
 
         <item
+            android:id="@+id/menuitem_data"
+            android:title="Daten"
+            android:icon="@drawable/ic_storage_black_36dp"/>
+
+        <item
             android:id="@+id/menuitem_graphs"
             android:title="Graphen"
             android:icon="@drawable/ic_equalizer_black_36dp"

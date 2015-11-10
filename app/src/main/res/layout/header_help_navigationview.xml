@@ -22,4 +22,15 @@
         android:textColor="@color/secondary_text"
         android:layout_margin="10dp" />
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/ginmaicon5"
+        android:layout_above="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp" />
+
 </RelativeLayout>

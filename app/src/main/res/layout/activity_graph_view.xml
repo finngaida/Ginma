@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
-        android:id="@+id/Toolbar_GraphView">
+        android:id="@+id/Toolbar_GraphView"
+        android:elevation="10dp">
 
     </android.support.v7.widget.Toolbar>
 
@@ -19,9 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/primary"
+        android:elevation="8dp"
         android:id="@+id/TabLayout_GraphView"
         android:layout_below="@+id/Toolbar_GraphView"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:fillViewport="true"
+        android:scrollIndicators="bottom" />
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"

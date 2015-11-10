@@ -15,7 +15,7 @@ import android.widget.TableLayout;
 
 public class GraphViewActivity extends AppCompatActivity {
 
-    Toolbar toolbar_graphview;
+    static Toolbar toolbar_graphview;
     ViewPager viewpager_graphview;
     TabLayout tablyout_graphview;
     ActionBar actionbar_graphview;
@@ -26,6 +26,9 @@ public class GraphViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_graph_view);
 
         toolbar_graphview = (Toolbar) findViewById(R.id.Toolbar_GraphView);
+        setSupportActionBar(toolbar_graphview);
+        toolbar_graphview.setSubtitle(ChooseProjektActivity.USERS_PATH);
+
         actionbar_graphview = getSupportActionBar();
         actionbar_graphview.setDisplayHomeAsUpEnabled(true);
 
@@ -65,7 +68,9 @@ public class GraphViewActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_graph_view, menu);
+        //getMenuInflater().inflate(R.menu.menu_graph_view, menu);
+
+
         return true;
     }
 
@@ -80,10 +85,18 @@ public class GraphViewActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == android.R.id.home){
+            onBackPressed();
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
 
 

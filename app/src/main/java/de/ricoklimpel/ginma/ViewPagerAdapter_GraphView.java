@@ -23,9 +23,13 @@ public class ViewPagerAdapter_GraphView extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
 
         switch (position){
-            case 0: return new Fragment_GraphView_Data();
-            case 1: return new Fragment_GraphView_Graph();
-            case 2:return  new Fragment_GraphView_Graph();
+            case 0: {
+                return new Fragment_GraphView_Data();
+
+            }
+            case 1:{
+                return new Fragment_GraphView_Graph();
+            }
 
         }
 

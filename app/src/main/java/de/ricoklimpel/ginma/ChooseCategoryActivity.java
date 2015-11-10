@@ -100,14 +100,14 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         FAM_categorys.collapse();
 
         LayoutInflater AD_inflater = getLayoutInflater();
-        View AD_View = AD_inflater.inflate(R.layout.ad_textinput_projects,null);
+        View AD_View = AD_inflater.inflate(R.layout.ad_textinput_categorys,null);
 
         final AlertDialog.Builder AD_addProjectbuilder = new AlertDialog.Builder(ChooseCategoryActivity.this);
         AD_addProjectbuilder.setTitle("Neue Kategorie hinzufügen");
         AD_addProjectbuilder.setView(AD_View);
 
-        btn_AD_addcategory = (Button)AD_View.findViewById(R.id.btn_AD_addprojects);
-        eT_AD_addcategory = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addprojects);
+        btn_AD_addcategory = (Button)AD_View.findViewById(R.id.btn_AD_addcategorys);
+        eT_AD_addcategory = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addcategorys);
 
         final AlertDialog AD_addProject = AD_addProjectbuilder.create();
 
