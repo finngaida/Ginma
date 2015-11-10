@@ -33,14 +33,19 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     static RecyclerView.Adapter RVA_categorys;
     RecyclerView.LayoutManager RVLM_categorys;
 
+    //Im Format "CID_"
+    static String Category_ID;
+
 
     FloatingActionButton FAB_HelpCat;
     FloatingActionButton FAB_PlusCat;
     static FloatingActionsMenu FAM_categorys;
 
-    static ArrayList<String> ArrayCategoryObjects;
+
+    static ArrayList<String> ArrayCategoryNames;
 
 
+    //Dialogelemente neue Kategorie erstellen
     Button btn_AD_addcategory;
     MaterialEditText eT_AD_addcategory;
 
@@ -60,16 +65,13 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         CCA_ActivityContent = this;
 
 
-        toolbar_choosecategory = (Toolbar)findViewById(R.id.Toolbar_ChooseCategory);
-        setSupportActionBar(toolbar_choosecategory);
-        toolbar_choosecategory.setSubtitle(ChooseProjektActivity.Projekt_ID.toUpperCase());
-        if(Build.VERSION.SDK_INT>=21){
-            toolbar_choosecategory.setElevation(25);
-        }
-        actionbar_choosecategory = getSupportActionBar();
-        actionbar_choosecategory.setDisplayHomeAsUpEnabled(true);
+        Init_Toolbar();
 
+        Init_FabMenu();
 
+    }
+
+    private void Init_FabMenu() {
         FAM_categorys = (FloatingActionsMenu)findViewById(R.id.FAM_categorys);
         FAB_HelpCat = (FloatingActionButton)findViewById(R.id.FAB_helpCat);
         FAB_HelpCat.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +94,18 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+
+    private void Init_Toolbar() {
+        toolbar_choosecategory = (Toolbar)findViewById(R.id.Toolbar_ChooseCategory);
+        setSupportActionBar(toolbar_choosecategory);
+        toolbar_choosecategory.setSubtitle(ChooseProjektActivity.Projekt_ID.toUpperCase());
+        if(Build.VERSION.SDK_INT>=21){
+            toolbar_choosecategory.setElevation(25);
+        }
+        actionbar_choosecategory = getSupportActionBar();
+        actionbar_choosecategory.setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -122,9 +135,10 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
                     } else {
 
-                        ArrayCategoryObjects.add(eT_AD_addcategory.getText().toString());
+                        addCategory();
+
                         RVA_categorys.notifyDataSetChanged();
-                        RV_categorys.smoothScrollToPosition(ArrayCategoryObjects.size());
+                        RV_categorys.smoothScrollToPosition(ArrayCategoryNames.size());
 
                         AD_addProject.dismiss();
                     }
@@ -137,16 +151,32 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         AD_addProject.show();
     }
 
+    private void addCategory() {
+
+
+        ArrayCategoryNames.add(eT_AD_addcategory.getText().toString());
+
+
+        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        prefseditor = prefs.edit();
+
+        prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
+        prefseditor.putString("dates_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
+        prefseditor.putString("values_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
+        prefseditor.putString("notes_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
+        prefseditor.commit();
+    }
 
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
+        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
         prefseditor = prefs.edit();
 
-        prefseditor.putString(ChooseProjektActivity.Projekt_ID, convertToString(ArrayCategoryObjects));
+        prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
+        prefseditor.putInt("category_quantity", ArrayCategoryNames.size());
         prefseditor.commit();
 
     }
@@ -156,17 +186,12 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        ArrayCategoryObjects = new ArrayList<>();
+        loadCategorynameArray();
 
+        Init_RecyclerView();
+    }
 
-        prefs = this.getSharedPreferences("ginma", MODE_PRIVATE);
-        String stringback =  prefs.getString(ChooseProjektActivity.Projekt_ID,"");
-
-        if(stringback!=""){
-            ArrayCategoryObjects.addAll(Arrays.asList(stringback.split(","))) ;
-        }
-
-
+    private void Init_RecyclerView() {
         RV_categorys = (RecyclerView)findViewById(R.id.RV_categorys);
         RVLM_categorys = new LinearLayoutManager(this);
 
@@ -177,17 +202,29 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     }
 
 
+    private void loadCategorynameArray() {
+        ArrayCategoryNames = new ArrayList<>();
+
+        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        String stringback =  prefs.getString("category_names","");
+
+        if(stringback!=""){
+            ArrayCategoryNames.addAll(Arrays.asList(stringback.split(","))) ;
+        }
+    }
+
+
     static public void DeleteDialog(final int i, Activity activity){
         new AlertDialog.Builder(activity)
                 .setTitle("Kategorie löschen")
                 .setMessage("Bist du dir sicher das '" +
-                        ChooseCategoryActivity.ArrayCategoryObjects.get(i) +
+                        ChooseCategoryActivity.ArrayCategoryNames.get(i) +
                         "' und sämtliche Daten in dieser Kategorie gelöscht werden sollen?")
 
                 .setPositiveButton("löschen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        ChooseCategoryActivity.ArrayCategoryObjects.remove(i);
+                        ChooseCategoryActivity.ArrayCategoryNames.remove(i);
                         RVA_categorys.notifyDataSetChanged();
 
                     }
@@ -200,7 +237,6 @@ public class ChooseCategoryActivity extends AppCompatActivity {
                 .setIcon(R.drawable.ic_warning_black_36dp)
                 .show();
     }
-
 
 
     private String convertToString(ArrayList<String> list) {

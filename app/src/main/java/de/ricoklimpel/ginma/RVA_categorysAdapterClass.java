@@ -52,7 +52,7 @@ public class RVA_categorysAdapterClass
     public void onBindViewHolder(ViewHolderClass viewHolderClass, final int i) {
 
         viewHolderClass.tV_cardContent_catergorys
-                .setText(ChooseCategoryActivity.ArrayCategoryObjects.get(i));
+                .setText(ChooseCategoryActivity.ArrayCategoryNames.get(i));
 
 
         viewHolderClass.itemView.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +62,7 @@ public class RVA_categorysAdapterClass
                 //Weitergeben an Graph View
 
 
+                ChooseCategoryActivity.Category_ID = "CAT_"+String.valueOf(i);
 
 
                 Intent categoryintent = new Intent(ChooseCategoryActivity.CCA_ActivityContent, GraphViewActivity.class);
@@ -85,6 +86,6 @@ public class RVA_categorysAdapterClass
 
     @Override
     public int getItemCount() {
-        return ChooseCategoryActivity.ArrayCategoryObjects.size();
+        return ChooseCategoryActivity.ArrayCategoryNames.size();
     }
 }

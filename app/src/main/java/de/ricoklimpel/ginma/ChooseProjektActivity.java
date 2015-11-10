@@ -56,11 +56,14 @@ public class ChooseProjektActivity extends AppCompatActivity {
     MaterialEditText eT_AD_addproject;
 
 
+    //Shared Prefernces Manager zum Speichern und abrufen von Daten
     SharedPreferences prefs_values;
     SharedPreferences.Editor prefseditor_values;
 
-    static SharedPreferences prefs_cat;
-    static SharedPreferences.Editor prefseditor_cat;
+
+    //Shared Preferences Manager zum erstellen von neuen Kategorien
+    static SharedPreferences prefs_create;
+    static SharedPreferences.Editor prefseditor_create;
 
     Toolbar toolbar_chooseproject;
 
@@ -194,11 +197,11 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
 
-        prefs_cat = this.getSharedPreferences("ID_" + String.valueOf(ArrayProjectNames.size()-1), MODE_PRIVATE);
-        prefseditor_cat = prefs_cat.edit();
+        prefs_create = this.getSharedPreferences("ID_" + String.valueOf(ArrayProjectNames.size()-1), MODE_PRIVATE);
+        prefseditor_create = prefs_create.edit();
 
-        prefseditor_cat.putString("category_names", "");
-        prefseditor_cat.commit();
+        prefseditor_create.putString("category_names", "");
+        prefseditor_create.commit();
 
 
     }
@@ -224,6 +227,11 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
         loadProjektnameArray();
 
+        Init_RecyclerView();
+    }
+
+
+    private void Init_RecyclerView() {
         RV_projects = (RecyclerView)findViewById(R.id.RV_projects);
         RVLM_projects = new LinearLayoutManager(this);
 
@@ -257,9 +265,9 @@ public class ChooseProjektActivity extends AppCompatActivity {
                 .setPositiveButton("löschen", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
-                        prefs_cat = CPA_activityContent.getSharedPreferences(
+                        prefs_create = CPA_activityContent.getSharedPreferences(
                                 "ID_" + String.valueOf(i), MODE_PRIVATE);
-                        prefs_cat.edit().clear().commit();
+                        prefs_create.edit().clear().commit();
 
 
                         ChooseProjektActivity.ArrayProjectNames.remove(i);
