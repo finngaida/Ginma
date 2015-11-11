@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by ricoklimpel on 10.11.15.
  */
@@ -44,9 +47,12 @@ public class RVA_graphView_data
     @Override
     public void onBindViewHolder(ViewHolderKlasse holder, int position) {
 
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy  -  HH:mm");
+
+        Date date = Fragment_GraphView_Data.items_dates.get(position);
 
         holder.tv_graphdata_date.setText(
-                String.valueOf(Fragment_GraphView_Data.items_dates.get(position)));
+                String.valueOf(format.format(date)));
         holder.tv_graphdata_notes.setText(
                 Fragment_GraphView_Data.items_notes.get(position));
         holder.tv_graphdata_values.setText(

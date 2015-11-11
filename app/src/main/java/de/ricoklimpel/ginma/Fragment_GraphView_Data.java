@@ -1,6 +1,8 @@
 package de.ricoklimpel.ginma;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +41,18 @@ public class Fragment_GraphView_Data extends Fragment {
     static ArrayList<String> items_notes;
     static ArrayList<Date> items_dates;
     static ArrayList<Double> items_values;
+
+
+    FloatingActionButton FAB_addData;
+
+    static Date add_FullDate;
+    static Date add_Date;
+    static Time add_Time;
+    static String add_note;
+    static Double add_value;
+
+    TimePickerDialog timePickerDialog;
+    DatePickerDialog datePickerDialog;
 
 
     @Nullable
@@ -62,10 +79,10 @@ public class Fragment_GraphView_Data extends Fragment {
         items_values = new ArrayList<>();
 
 
-        SimpleDateFormat format = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
 
         try {
-            date = format.parse("11/03/14 09:33:43");
+            date = format.parse("11.03.14 09:33");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -73,12 +90,26 @@ public class Fragment_GraphView_Data extends Fragment {
 
 
         items_dates.add(date);
-        items_notes.add("Matheklausur");
+        items_notes.add("Klausur");
         items_values.add(13.0);
 
         items_dates.add(date);
-        items_notes.add("mündlich 29.");
+        items_notes.add("Mündliche Note");
         items_values.add(9.0);
+
+
+        FAB_addData = (FloatingActionButton)contentView_graphview_data.findViewById(R.id.FAB_addData);
+
+        FAB_addData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                add_Data();
+
+            }
+        });
+
+
 
         RV_Graph_Data = (RecyclerView)contentView_graphview_data.findViewById(R.id.RV_GraphView_Data);
         RVLM_Graph_Data = new LinearLayoutManager(this.getActivity());
@@ -88,6 +119,11 @@ public class Fragment_GraphView_Data extends Fragment {
         RV_Graph_Data.setAdapter(RVA_Graph_Data);
 
 
+    }
+
+
+    private void add_Data() {
+        FAB_addData.getColorPressed();
     }
 
 

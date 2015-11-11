@@ -100,7 +100,11 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     private void Init_Toolbar() {
         toolbar_choosecategory = (Toolbar)findViewById(R.id.Toolbar_ChooseCategory);
         setSupportActionBar(toolbar_choosecategory);
-        toolbar_choosecategory.setSubtitle(ChooseProjektActivity.Projekt_ID.toUpperCase());
+
+        toolbar_choosecategory.setSubtitle(
+                ChooseProjektActivity.ArrayProjectNames.get(
+                        Integer.valueOf(ChooseProjektActivity.Projekt_ID)));
+
         if(Build.VERSION.SDK_INT>=21){
             toolbar_choosecategory.setElevation(25);
         }
@@ -157,7 +161,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         ArrayCategoryNames.add(eT_AD_addcategory.getText().toString());
 
 
-        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        prefs = this.getSharedPreferences(String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
         prefseditor = prefs.edit();
 
         prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
@@ -172,7 +176,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        prefs = this.getSharedPreferences(String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
         prefseditor = prefs.edit();
 
         prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
@@ -205,7 +209,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     private void loadCategorynameArray() {
         ArrayCategoryNames = new ArrayList<>();
 
-        prefs = this.getSharedPreferences(String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        prefs = this.getSharedPreferences(String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
         String stringback =  prefs.getString("category_names","");
 
         if(stringback!=""){
@@ -226,7 +230,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
 
                         prefs = CCA_ActivityContent.getSharedPreferences(
-                                String.valueOf(ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+                                String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
                         prefs.edit().remove("dates_CID_"+String.valueOf(i)).commit();
                         prefs.edit().remove("values_CID_"+String.valueOf(i)).commit();
                         prefs.edit().remove("notes_CID_"+String.valueOf(i)).commit();

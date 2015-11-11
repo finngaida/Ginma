@@ -59,7 +59,7 @@ public class RVA_projectsAdapterClass
             @Override
             public void onClick(View v) {
 
-                ChooseProjektActivity.Projekt_ID = "ID_"+String.valueOf(i);
+                ChooseProjektActivity.Projekt_ID = String.valueOf(i);
 
                 Intent categoryintent = new Intent(ChooseProjektActivity.CPA_activityContent, ChooseCategoryActivity.class);
                 ChooseProjektActivity.CPA_activityContent.startActivity(categoryintent);

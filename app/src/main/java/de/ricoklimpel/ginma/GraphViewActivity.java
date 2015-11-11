@@ -34,7 +34,10 @@ public class GraphViewActivity extends AppCompatActivity {
 
         toolbar_graphview = (Toolbar) findViewById(R.id.Toolbar_GraphView);
         setSupportActionBar(toolbar_graphview);
-        toolbar_graphview.setSubtitle(ChooseProjektActivity.Projekt_ID);
+        toolbar_graphview.setSubtitle(ChooseProjektActivity.ArrayProjectNames.get(
+                Integer.valueOf(ChooseProjektActivity.Projekt_ID))
+                + " => " + ChooseCategoryActivity.ArrayCategoryNames.get(
+                Integer.valueOf(ChooseCategoryActivity.Category_ID)));
 
         actionbar_graphview = getSupportActionBar();
         actionbar_graphview.setDisplayHomeAsUpEnabled(true);
