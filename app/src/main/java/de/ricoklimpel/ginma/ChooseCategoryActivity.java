@@ -155,6 +155,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         AD_addProject.show();
     }
 
+
     private void addCategory() {
 
 
@@ -194,6 +195,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
         Init_RecyclerView();
     }
+
 
     private void Init_RecyclerView() {
         RV_categorys = (RecyclerView)findViewById(R.id.RV_categorys);
