@@ -47,16 +47,16 @@ public class RVA_graphView_data
     @Override
     public void onBindViewHolder(ViewHolderKlasse holder, int position) {
 
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy  -  HH:mm");
+        //SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy  -  HH:mm");
 
-        Date date = Fragment_GraphView_Data.items_dates.get(position);
+        //Date date = Fragment_GraphView_Data.items_dates.get(position);
 
         holder.tv_graphdata_date.setText(
-                String.valueOf(format.format(date)));
+                Fragment_GraphView_Data.items_dates.get(position));
         holder.tv_graphdata_notes.setText(
                 Fragment_GraphView_Data.items_notes.get(position));
         holder.tv_graphdata_values.setText(
-                String.valueOf(Fragment_GraphView_Data.items_values.get(position)));
+                Fragment_GraphView_Data.items_values.get(position));
 
 
     }

@@ -285,7 +285,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
     }
 
 
-    private String convertToString(ArrayList<String> list) {
+    public static  String convertToString(ArrayList<String> list) {
 
         StringBuilder sb = new StringBuilder();
         String delim = "";

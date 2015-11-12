@@ -4,6 +4,7 @@ package de.ricoklimpel.ginma;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 /**
  * Created by ricoklimpel on 09.11.15.
@@ -26,9 +27,11 @@ public class ViewPagerAdapter_GraphView extends FragmentPagerAdapter {
             case 0: {
                 return new Fragment_GraphView_Data();
 
+
             }
             case 1:{
                 return new Fragment_GraphView_Graph();
+
             }
 
         }
@@ -36,6 +39,9 @@ public class ViewPagerAdapter_GraphView extends FragmentPagerAdapter {
 
         return null;
     }
+
+
+
 
     @Override
     public int getCount() {

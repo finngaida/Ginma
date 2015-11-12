@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,9 +24,12 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -42,8 +46,11 @@ public class Fragment_GraphView_Data extends Fragment {
     RecyclerView.LayoutManager RVLM_Graph_Data;
 
     static ArrayList<String> items_notes;
-    static ArrayList<Date> items_dates;
-    static ArrayList<Double> items_values;
+    static ArrayList<String> items_dates;
+    static ArrayList<String> items_values;
+
+    static ArrayList<String> helper_item_dates;
+    static ArrayList<String> helper_item_values;
 
 
     FloatingActionButton FAB_addData;
@@ -62,6 +69,9 @@ public class Fragment_GraphView_Data extends Fragment {
     Button btn_AD_addData;
     MaterialEditText eT_AD_addNote;
     MaterialEditText eT_AD_addValue;
+
+    static SharedPreferences prefs;
+    static SharedPreferences.Editor prefseditor;
 
 
     @Nullable
@@ -83,9 +93,6 @@ public class Fragment_GraphView_Data extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        items_dates = new ArrayList<>();
-        items_notes = new ArrayList<>();
-        items_values = new ArrayList<>();
 
 
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
@@ -97,14 +104,6 @@ public class Fragment_GraphView_Data extends Fragment {
         }
 
 
-
-        items_dates.add(date);
-        items_notes.add("Klausur");
-        items_values.add(13.0);
-
-        items_dates.add(date);
-        items_notes.add("Mündliche Note");
-        items_values.add(9.0);
 
 
 
@@ -165,7 +164,6 @@ public class Fragment_GraphView_Data extends Fragment {
         timePickerDialog.show();
     }
 
-
     
     private void add_ValueandNote() {
 
@@ -187,28 +185,28 @@ public class Fragment_GraphView_Data extends Fragment {
             public void onClick(View v) {
 
                 if ((eT_AD_addNote.getText().toString() == "")
-                ||(eT_AD_addNote.getText().toString().length()>20)
+                ||(eT_AD_addNote.getText().length()>20)
                 ||(eT_AD_addValue.getText().toString() == "")
-                ||(eT_AD_addValue.getText().toString().length()>20)){
+                ||(eT_AD_addValue.getText().length()>20)){
 
                     //Error
 
                 }else{
 
-                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
+                    /*SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
                     String Datehelper = add_Date.toString() +" "+ add_Time.toString();
                     try {
                         add_FullDate = format.parse(Datehelper);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
-
-                    Toast.makeText(getActivity(), eT_AD_addNote.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), eT_AD_addNote.getText().toString(), Toast.LENGTH_SHORT).show();*/
                     
                     items_notes.add(eT_AD_addNote.getText().toString());
-                    items_values.add(Double.valueOf(eT_AD_addValue.getText().toString()));
-                    items_dates.add(add_FullDate);
+                    items_values.add(eT_AD_addValue.getText().toString());
+                    items_dates.add(add_Date.toString() +" - "+ add_Time.toString());
+
+                    Fragment_GraphView_Graph.ChartReload();
 
                     AD_addData.dismiss();
 
@@ -218,17 +216,6 @@ public class Fragment_GraphView_Data extends Fragment {
         });
 
         AD_addData.show();
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-
-        Init_RecyclerView();
-
-
     }
 
 
@@ -243,7 +230,81 @@ public class Fragment_GraphView_Data extends Fragment {
 
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+
+        loadArrayData();
+
+
+        Init_RecyclerView();
+
+    }
+
+    private void loadArrayData() {
+        items_values = new ArrayList<>();
+        items_notes = new ArrayList<>();
+        items_dates = new ArrayList<>();
+
+        prefs = getActivity().getSharedPreferences(String.valueOf
+                ("ID_" + ChooseProjektActivity.Projekt_ID), getActivity().MODE_PRIVATE);
+        String stringback = prefs.getString("CID_" + ChooseCategoryActivity.Category_ID + "_notes", "");
+        if(stringback!=""){
+            items_notes.addAll(Arrays.asList(stringback.split(","))) ;
+        }
+        stringback =  prefs.getString("CID_" + ChooseCategoryActivity.Category_ID + "_values", "");
+        if(stringback!=""){
+            items_values.addAll(Arrays.asList(stringback.split(","))) ;
+        }
+
+        stringback =  prefs.getString("CID_" + ChooseCategoryActivity.Category_ID + "_dates", "");
+        if(stringback!=""){
+            items_dates.addAll(Arrays.asList(stringback.split(","))) ;
+        }
+    }
+
+
+    @Override
     public void onPause() {
         super.onPause();
+
+
+        saveArrayData();
+
+    }
+
+    private void saveArrayData() {
+        prefs = getActivity().getSharedPreferences
+                ("ID_" + ChooseProjektActivity.Projekt_ID , getActivity().MODE_PRIVATE);
+        prefseditor = prefs.edit();
+
+        prefseditor.putString
+                ("CID_" + ChooseCategoryActivity.Category_ID + "_notes", convertToString(items_notes));
+        prefseditor.putString
+                ("CID_" + ChooseCategoryActivity.Category_ID + "_values", convertToString(items_values));
+        prefseditor.putString
+                ("CID_" + ChooseCategoryActivity.Category_ID + "_dates", convertToString(items_dates));
+        prefseditor.commit();
+    }
+
+
+    private String convertToString(ArrayList<String> list) {
+
+        StringBuilder sb = new StringBuilder();
+        String delim = "";
+        for (String s : list)
+        {
+            sb.append(delim);
+            sb.append(s);;
+            delim = ",";
+        }
+        return sb.toString();
+    }
+
+
+    private ArrayList<String> convertToArray(String string) {
+
+        ArrayList<String> list = new ArrayList<String>(Arrays.asList(string.split(",")));
+        return list;
     }
 }

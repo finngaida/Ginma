@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.util.AxisAutoValues;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -24,7 +26,7 @@ import lecho.lib.hellocharts.view.LineChartView;
  */
 public class Fragment_GraphView_Graph extends Fragment {
 
-    View contentView_graphview_graph;
+    static View contentView_graphview_graph;
 
     @Nullable
     @Override
@@ -39,46 +41,70 @@ public class Fragment_GraphView_Graph extends Fragment {
 
 
 
-    LineChartView chart1;
-    LineChartData data;
+    static LineChartView chart1;
+    static LineChartData data;
 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
+
+
+
+
+    }
+
+    @Override
+    public  void onResume() {
+        super.onResume();
+
+
+        ChartReload();
+
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+
+    public static void ChartReload() {
+
         List<PointValue> values = new ArrayList<PointValue>();
         List<Line> lines = new ArrayList<Line>();
-        values.add(new PointValue(0, 2));
-        values.add(new PointValue(1, 4));
-        values.add(new PointValue(2, 3));
-        values.add(new PointValue(3, 4));
-        values.add(new PointValue(4, 10));
-        values.add(new PointValue(5, 3));
-        values.add(new PointValue(6, 17));
-        values.add(new PointValue(7, 9));
+
+        Float f;
+
+        for(int i=0; i<Fragment_GraphView_Data.items_values.size(); i++)
+
+        {
+            int Coord = i;
+            values.add(new PointValue(i, Integer.valueOf(Fragment_GraphView_Data.items_values.get(i))));
+        }
+
+
 
         Line line = new Line(values);
         line.setColor(Color.BLUE);
         line.setFilled(true);
         line.setCubic(true);
-        line.setHasLabelsOnlyForSelected(true);
+        line.setHasLabels(true);
         line.setHasLines(true);
         line.setHasPoints(true);
 
         lines.add(line);
         data = new LineChartData(lines);
+        data.setBaseValue(0);
 
         chart1 = (LineChartView)contentView_graphview_graph.findViewById(R.id.chart);
 
         chart1.setLineChartData(data);
-        chart1.isInteractive();
-        chart1.setScrollContainer(true);
-        chart1.setZoomEnabled(true);
-        chart1.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
-
-
-
+        chart1.setBottom(-10);
 
 
     }
