@@ -63,6 +63,7 @@ public class RVA_projectsAdapterClass
 
                 Intent categoryintent = new Intent(ChooseProjektActivity.CPA_activityContent, ChooseCategoryActivity.class);
                 ChooseProjektActivity.CPA_activityContent.startActivity(categoryintent);
+                ChooseProjektActivity.CPA_activityContent.overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
             }
         });

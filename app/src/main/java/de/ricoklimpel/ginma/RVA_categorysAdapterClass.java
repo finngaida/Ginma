@@ -67,6 +67,7 @@ public class RVA_categorysAdapterClass
 
                 Intent categoryintent = new Intent(ChooseCategoryActivity.CCA_ActivityContent, GraphViewActivity.class);
                 ChooseCategoryActivity.CCA_ActivityContent.startActivity(categoryintent);
+                ChooseCategoryActivity.CCA_ActivityContent.overridePendingTransition(R.anim.left_out,R.anim.right_in);
 
             }
         });

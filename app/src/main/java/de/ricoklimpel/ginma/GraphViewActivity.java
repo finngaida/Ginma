@@ -1,6 +1,7 @@
 package de.ricoklimpel.ginma;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -107,7 +108,11 @@ public class GraphViewActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Intent categoryintent = new Intent(GraphViewActivity.this, ChooseCategoryActivity.class);
+        startActivity(categoryintent);
+        overridePendingTransition(R.anim.left_in,R.anim.right_out);
+
     }
 }
 

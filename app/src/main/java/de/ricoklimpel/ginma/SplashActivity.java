@@ -37,7 +37,7 @@ public class SplashActivity extends Activity {
                 //Pass to next Activity
                 Intent intent = new Intent(SplashActivity.this, ChooseProjektActivity.class);
                 startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                overridePendingTransition(R.anim.right_in, R.anim.left_out);
 
             }
 

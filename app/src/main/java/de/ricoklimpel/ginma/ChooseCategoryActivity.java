@@ -133,12 +133,14 @@ public class ChooseCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (eT_AD_addcategory.getText().toString() != "") {
-                    if (eT_AD_addcategory.length() > 20) {
+                if (eT_AD_addcategory.getText().toString().isEmpty()) {
 
-                        Toast.makeText(ChooseCategoryActivity.this, "Maximal 20 Zeichen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChooseCategoryActivity.this, "Trage einen Kategorienamen ein!", Toast.LENGTH_SHORT).show();
 
-                    }
+
+                }else if (eT_AD_addcategory.getText().toString().length() > 20) {
+
+                    Toast.makeText(ChooseCategoryActivity.this, "Maximal 20 Zeichen!", Toast.LENGTH_SHORT).show();
 
                 }else {
 
@@ -302,6 +304,9 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Intent categoryintent = new Intent(ChooseCategoryActivity.CCA_ActivityContent, ChooseProjektActivity.class);
+        ChooseCategoryActivity.CCA_ActivityContent.startActivity(categoryintent);
+        ChooseCategoryActivity.CCA_ActivityContent.overridePendingTransition(R.anim.left_in,R.anim.right_out);
     }
 }
