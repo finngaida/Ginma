@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -69,6 +70,8 @@ public class Fragment_GraphView_Data extends Fragment {
     Button btn_AD_addData;
     MaterialEditText eT_AD_addNote;
     MaterialEditText eT_AD_addValue;
+    MaterialEditText eT_AD_addTime;
+    MaterialEditText eT_AD_addDate;
 
     static SharedPreferences prefs;
     static SharedPreferences.Editor prefseditor;
@@ -128,44 +131,13 @@ public class Fragment_GraphView_Data extends Fragment {
     }
 
 
-    private void add_Data() {
+
+
+    
+    public void add_Data() {
 
         calendar = Calendar.getInstance();
 
-        timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                add_Time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
-
-                datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                        add_Date = String.valueOf(dayOfMonth)+"."
-                                +String.valueOf(monthOfYear)+"."
-                                +String.valueOf(year);
-
-
-                        add_ValueandNote();
-
-                    }
-                },calendar.get(Calendar.YEAR)
-                ,calendar.get(Calendar.MONTH)
-                ,calendar.get(Calendar.DAY_OF_MONTH));
-
-                datePickerDialog.show();
-
-            }
-        }, calendar.get(Calendar.HOUR_OF_DAY)
-                ,calendar.get(Calendar.MINUTE)
-                ,DateFormat.is24HourFormat(getActivity()));
-
-        timePickerDialog.show();
-    }
-
-    
-    private void add_ValueandNote() {
 
         LayoutInflater AD_inflater = getActivity().getLayoutInflater();
         View AD_View = AD_inflater.inflate(R.layout.ad_adddata_graphview,null);
@@ -177,31 +149,92 @@ public class Fragment_GraphView_Data extends Fragment {
         btn_AD_addData = (Button)AD_View.findViewById(R.id.btn_AD_addData);
         eT_AD_addNote = (MaterialEditText)AD_View.findViewById(R.id.eT_Add_Note);
         eT_AD_addValue = (MaterialEditText)AD_View.findViewById(R.id.eT_AddData);
+        eT_AD_addTime = (MaterialEditText)AD_View.findViewById(R.id.eT_Add_Time);
+        eT_AD_addDate = (MaterialEditText)AD_View.findViewById(R.id.eT_Add_Date);
+
+        add_Date = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH)) + "."
+                + String.valueOf(calendar.get(Calendar.MONTH)) + "."
+                + String.valueOf(calendar.get(Calendar.YEAR));
+
+        eT_AD_addDate.setText(add_Date);
+
+        add_Time = String.valueOf(calendar.get(Calendar.HOUR_OF_DAY))
+                + ":" + String.valueOf(calendar.get(Calendar.MINUTE));
+
+        eT_AD_addTime.setText(add_Time);
+
 
         final AlertDialog AD_addData = AD_addDataBuilder.create();
+
+
+
+        eT_AD_addDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true){
+
+                    Choose_Date();
+
+                }
+            }
+        });
+
+        eT_AD_addDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Choose_Date();
+            }
+        });
+
+
+        eT_AD_addTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Choose_Time();
+            }
+        });
+
+        eT_AD_addTime.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus == true){
+
+                Choose_Time();
+
+                }
+            }
+        });
+
+
 
         btn_AD_addData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ((eT_AD_addNote.getText().toString() == "")
-                ||(eT_AD_addNote.getText().length()>20)
-                ||(eT_AD_addValue.getText().toString() == "")
-                ||(eT_AD_addValue.getText().length()>20)){
 
-                    //Error
+               if (eT_AD_addNote.getText().toString().isEmpty()) {
 
-                }else{
+                   Toast.makeText(getActivity(), "gib eine Daten-Notiz ein!", Toast.LENGTH_SHORT).show();
 
-                    /*SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy HH:mm");
-                    String Datehelper = add_Date.toString() +" "+ add_Time.toString();
-                    try {
-                        add_FullDate = format.parse(Datehelper);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    Toast.makeText(getActivity(), eT_AD_addNote.getText().toString(), Toast.LENGTH_SHORT).show();*/
-                    
+               }else if (eT_AD_addNote.getText().toString().length() > 20){
+
+                    Toast.makeText(getActivity(), "nicht mehr als 20 Zeichen!", Toast.LENGTH_SHORT).show();
+                   
+               }else if (eT_AD_addNote.getText().toString().isEmpty()){
+
+                   Toast.makeText(getActivity(), "gib einen Daten-Wert ein!", Toast.LENGTH_SHORT).show();
+
+               }else if (eT_AD_addValue.getText().toString().length() > 20){
+
+                   Toast.makeText(getActivity(), "nicht mehr als 20 Zeichen!", Toast.LENGTH_SHORT).show();
+                   
+               }
+
+               else{
+
                     items_notes.add(eT_AD_addNote.getText().toString());
                     items_values.add(eT_AD_addValue.getText().toString());
                     items_dates.add(add_Date.toString() +" - "+ add_Time.toString());
@@ -210,12 +243,49 @@ public class Fragment_GraphView_Data extends Fragment {
 
                     AD_addData.dismiss();
 
-                }
+               }
 
             }
         });
 
         AD_addData.show();
+    }
+
+    private void Choose_Date() {
+        datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                add_Date = String.valueOf(dayOfMonth) + "."
+                        + String.valueOf(monthOfYear) + "."
+                        + String.valueOf(year);
+
+                eT_AD_addDate.setText(add_Date);
+
+            }
+        }, calendar.get(Calendar.YEAR)
+                , calendar.get(Calendar.MONTH)
+                , calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
+    }
+
+    private void Choose_Time() {
+        timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+                add_Time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+
+                eT_AD_addTime.setText(add_Time);
+
+
+            }
+        }, calendar.get(Calendar.HOUR_OF_DAY)
+                ,calendar.get(Calendar.MINUTE)
+                , DateFormat.is24HourFormat(getActivity()));
+
+        timePickerDialog.show();
     }
 
 
@@ -295,7 +365,7 @@ public class Fragment_GraphView_Data extends Fragment {
         for (String s : list)
         {
             sb.append(delim);
-            sb.append(s);;
+            sb.append(s);
             delim = ",";
         }
         return sb.toString();

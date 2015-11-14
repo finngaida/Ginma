@@ -14,29 +14,53 @@
         app:met_floatingLabel="highlight"
         app:met_minCharacters="1"
         app:met_maxCharacters="20"
+        app:met_clearButton="true"
         android:layout_margin="10dp" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Daten eingeben"
+        android:hint="Datum eintragen"
+        android:id="@+id/eT_Add_Date"
+        app:met_underlineColor="@color/primary"
+        app:met_floatingLabel="highlight"
+        android:layout_margin="10dp" />
+
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Zeit eintragen"
+        app:met_underlineColor="@color/primary"
+        android:id="@+id/eT_Add_Time"
+        app:met_floatingLabel="highlight"
+        android:layout_margin="10dp" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Daten-Wert eingeben"
         android:id="@+id/eT_AddData"
         app:met_floatingLabel="highlight"
         app:met_minCharacters="1"
         app:met_maxCharacters="20"
+        app:met_clearButton="true"
+        app:met_underlineColor="@color/accent"
         android:layout_margin="10dp"
-        android:inputType="numberDecimal" />
+        android:inputType="datetime" />
 
 
     <Button
         android:id="@+id/btn_AD_addData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/accent"
         android:elevation="25dp"
         android:textColor="@color/primary_text"
         android:layout_gravity="center_horizontal"
         android:text="speichern"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:elegantTextHeight="false"
+        android:contextClickable="false" />
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.internal.app.ToolbarActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -144,7 +146,6 @@ public class ChooseProjektActivity extends AppCompatActivity {
         View AD_View = AD_inflater.inflate(R.layout.ad_textinput_projects,null);
 
         final AlertDialog.Builder AD_addProjectbuilder = new AlertDialog.Builder(ChooseProjektActivity.this);
-        //AD_addProjectbuilder.setIcon(R.drawable.ic_add_black_24dp);
         AD_addProjectbuilder.setTitle("Neues Projekt hinzufügen");
         AD_addProjectbuilder.setView(AD_View);
 
@@ -157,22 +158,23 @@ public class ChooseProjektActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (eT_AD_addproject.getText().toString() != "") {
-                    if (eT_AD_addproject.length() > 20) {
+                if (eT_AD_addproject.getText().toString().isEmpty()) {
 
-                        //Flash Button red or something?
+                    Toast.makeText(ChooseProjektActivity.this, "Bitte trage einen Projektnamen ein!", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                }else if (eT_AD_addproject.getText().toString().length() > 20){
 
-                        addProjekt();
+                    Toast.makeText(ChooseProjektActivity.this, "Nicht mehr als 20 Zeichen!", Toast.LENGTH_SHORT).show();
+                    
+                }else{
+
+                    addProjekt();
 
 
-                        RVA_projects.notifyDataSetChanged();
-                        RV_projects.smoothScrollToPosition(ArrayProjectNames.size());
+                    RVA_projects.notifyDataSetChanged();
+                    RV_projects.smoothScrollToPosition(ArrayProjectNames.size());
 
-                        AD_addProject.dismiss();
-                    }
-
+                    AD_addProject.dismiss();
                 }
 
             }

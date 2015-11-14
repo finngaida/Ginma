@@ -22,8 +22,8 @@ public class SplashActivity extends Activity {
 
         //Logoanimation
         AlphaAnimation animation2 = new AlphaAnimation(1.0f, 0.0f);
-        animation2.setDuration(1000);
-        animation2.setStartOffset(1000);
+        animation2.setDuration(1300);
+        animation2.setStartOffset(1500);
         animation2.setFillAfter(true);
         animation2.setAnimationListener(new Animation.AnimationListener() {
             @Override

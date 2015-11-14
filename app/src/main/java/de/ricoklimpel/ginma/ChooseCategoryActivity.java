@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -135,18 +136,18 @@ public class ChooseCategoryActivity extends AppCompatActivity {
                 if (eT_AD_addcategory.getText().toString() != "") {
                     if (eT_AD_addcategory.length() > 20) {
 
-                        //Flash Button red or something?
+                        Toast.makeText(ChooseCategoryActivity.this, "Maximal 20 Zeichen!", Toast.LENGTH_SHORT).show();
 
-                    } else {
-
-                        addCategory();
-
-                        RVA_categorys.notifyDataSetChanged();
-                        RV_categorys.smoothScrollToPosition(ArrayCategoryNames.size());
-
-                        AD_addProject.dismiss();
                     }
 
+                }else {
+
+                    addCategory();
+
+                    RVA_categorys.notifyDataSetChanged();
+                    RV_categorys.smoothScrollToPosition(ArrayCategoryNames.size());
+
+                    AD_addProject.dismiss();
                 }
 
             }
