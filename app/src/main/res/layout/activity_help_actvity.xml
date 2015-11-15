@@ -26,19 +26,15 @@
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:background="@color/cardview_dark_background"
             android:id="@+id/RL_HelpActivity">
 
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:id="@+id/tV_Helptext"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="30dp"
-                android:gravity="left|top"
-                android:textSize="19dp" />
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/ViewPager_Help"
+                 />
 
 
         </RelativeLayout>
@@ -57,11 +53,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/help_navigationView"
+                android:background="@color/cardview_dark_background"
                 app:menu="@menu/menu_navigationview_help"
-                app:headerLayout="@layout/header_help_navigationview"
                 app:itemIconTint="@color/help_itemtint"
                 app:itemTextColor="@color/help_itemtint"
                 />
+
 
 
 

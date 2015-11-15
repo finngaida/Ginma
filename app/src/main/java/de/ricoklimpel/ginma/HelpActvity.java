@@ -2,6 +2,7 @@ package de.ricoklimpel.ginma;
 
 import android.content.res.Configuration;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,7 +21,7 @@ public class HelpActvity extends AppCompatActivity {
     Toolbar Toolbar_Help;
     ActionBar Actionbar_Help;
     NavigationView help_navigationView;
-    TextView tV_Helptext;
+    ViewPager viewpager_help;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,15 @@ public class HelpActvity extends AppCompatActivity {
         DrawerLayout_Help.setDrawerListener(DrawerToggle);
 
 
-        tV_Helptext = (TextView)findViewById(R.id.tV_Helptext);
+        viewpager_help = (ViewPager) findViewById(R.id.ViewPager_Help);
+
+        ViewPagerAdapter_Help viewPagerAdapter_help
+                = new ViewPagerAdapter_Help(getSupportFragmentManager());
+        viewpager_help.setAdapter(viewPagerAdapter_help);
+
+        viewpager_help.setCurrentItem(1);
+
+
         help_navigationView = (NavigationView)findViewById(R.id.help_navigationView);
 
         help_navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -50,34 +59,35 @@ public class HelpActvity extends AppCompatActivity {
 
                 switch(menuItem.getItemId()){
 
+                    case R.id.menuitem_examples:{
+
+                        viewpager_help.setCurrentItem(0);
+
+                        break;
+                    }
                     case R.id.menuitem_procat:{
 
-                        tV_Helptext.setText("Mit der Hilfe von Projekten und Kategorien kannst" +
-                                "du deine Daten und somit die supercoolen Graphen besser ordnen" +
-                                "und Kategorisieren");
+
+                        viewpager_help.setCurrentItem(1);
 
                         break;
                     }
                     case R.id.menuitem_data:{
 
-                        tV_Helptext.setText("Daten sind die Zahlen die du eingibtst um den " +
-                                "superheftigen Graphen zu bekommen den du umbedingt sehen willst" +
-                                "Daten können einfach Zahlen aber auch Streckenlängen oder Zeiten " +
-                                "also eigentlch alles mögliche sein");
+                        viewpager_help.setCurrentItem(2);
+
                         break;
 
                     }
                     case R.id.menuitem_graphs:{
 
-                        tV_Helptext.setText("Jaja Graphen sind heftig. sie tauchen einfach so auf " +
-                                "ohne das du irgendetwas tun musst. Dafür ist diese App da.");
+                        viewpager_help.setCurrentItem(3);
 
                         break;
                     }
                     case  R.id.menuitem_developer:{
 
-                        tV_Helptext.setText("Der Entwickler dieser Anwendung bin ich. das will" +
-                                "niemand wissen also höre ich auf zu reden.");
+                        viewpager_help.setCurrentItem(4);
 
                         break;
                     }

@@ -245,6 +245,16 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
 
                         ChooseCategoryActivity.ArrayCategoryNames.remove(i);
+
+
+                        prefs = CCA_ActivityContent.getSharedPreferences(String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+                        prefseditor = prefs.edit();
+
+                        prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
+                        prefseditor.putInt("category_quantity", ArrayCategoryNames.size());
+                        prefseditor.commit();
+
+
                         RVA_categorys.notifyDataSetChanged();
 
                     }
@@ -401,13 +411,25 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         ArrayCategoryNames.add(i, name);
 
 
-        /*prefs_values = CCA_ActivityContent.getSharedPreferences("values", MODE_PRIVATE);
-        prefseditor_values = prefs_values.edit();
+        prefs = CCA_ActivityContent.getSharedPreferences(String.valueOf("ID_" + ChooseProjektActivity.Projekt_ID), MODE_PRIVATE);
+        prefseditor = prefs.edit();
 
-        prefseditor_values.putString("project_names", convertToString(ArrayCategoryNames));
-        prefseditor_values.commit();*/
+        prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
+        prefseditor.putInt("category_quantity", ArrayCategoryNames.size());
+        prefseditor.commit();
 
 
     }
 
 }
+
+
+
+
+//TODO Kommazahlen bei den Graphdaten unterstützen
+//TODO den Graphen verschönern, das der nicht mehr aus dem Bildschirm rausgeht + evtl. Daten anzeigen
+//TODO Graphdaten automatisch nach Daten sortieren (gleich beim einfügen!!)
+//TODO Hilfe Bildschirm gestalten
+//TODO Entwickler Infos gestalten: Links zu Twitter FB usw.
+//TODO Beim Kategorieerstellen einheiten angeben für die Darinliegenden Daten
+//TODO Statistiken / Graphen als Bild teilen

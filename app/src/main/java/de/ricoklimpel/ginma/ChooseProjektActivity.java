@@ -397,7 +397,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_choose_projekt, menu);
+        getMenuInflater().inflate(R.menu.menu_choose_projekt, menu);
         return true;
     }
 
@@ -408,10 +408,15 @@ public class ChooseProjektActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
+
+        if (id == R.id.action_help) {
+
+            Intent intent = new Intent(ChooseProjektActivity.this, HelpActvity.class);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
             return true;
-        }*/
+        }
 
         //Zurückbutton in der Toolbaa
         if(id == android.R.id.home) {

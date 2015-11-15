@@ -5,6 +5,11 @@
         android:checkableBehavior="single">
 
         <item
+            android:title="Beispiele zur Nutzung"
+            android:id="@+id/menuitem_examples"
+            android:icon="@drawable/ic_visibility_black_36dp"/>
+
+        <item
             android:id="@+id/menuitem_procat"
             android:title="Projekte/Kategorien"
             android:icon="@drawable/ic_assignment_black_36dp"
