@@ -16,12 +16,15 @@ import android.widget.TextView;
 public class RVA_projectsAdapterClass
         extends RecyclerView.Adapter<RVA_projectsAdapterClass.ViewHolderClass> {
 
+    static CardView CV_projects;
+
+
 
     public class ViewHolderClass extends RecyclerView.ViewHolder {
 
-
-        CardView CV_projects;
         TextView tV_cardContent_projects;
+
+
 
 
         public ViewHolderClass(View itemView) {
@@ -72,7 +75,9 @@ public class RVA_projectsAdapterClass
             @Override
             public boolean onLongClick(View v) {
 
-                ChooseProjektActivity.DeleteDialog(i,ChooseProjektActivity.CPA_activityContent);
+                //ChooseProjektActivity.DeleteDialog(i,ChooseProjektActivity.CPA_activityContent);
+
+                ChooseProjektActivity.open_Popup(v,i,ChooseProjektActivity.CPA_activityContent);
 
                 return false;
             }

@@ -59,15 +59,13 @@ public class RVA_categorysAdapterClass
             @Override
             public void onClick(View v) {
 
-                //Weitergeben an Graph View
-
 
                 ChooseCategoryActivity.Category_ID = String.valueOf(i);
 
 
                 Intent categoryintent = new Intent(ChooseCategoryActivity.CCA_ActivityContent, GraphViewActivity.class);
                 ChooseCategoryActivity.CCA_ActivityContent.startActivity(categoryintent);
-                ChooseCategoryActivity.CCA_ActivityContent.overridePendingTransition(R.anim.left_out,R.anim.right_in);
+                ChooseCategoryActivity.CCA_ActivityContent.overridePendingTransition(R.anim.down_in,R.anim.up_out);
 
             }
         });

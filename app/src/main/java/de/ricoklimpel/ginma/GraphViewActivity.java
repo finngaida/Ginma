@@ -111,7 +111,7 @@ public class GraphViewActivity extends AppCompatActivity {
 
         Intent categoryintent = new Intent(GraphViewActivity.this, ChooseCategoryActivity.class);
         startActivity(categoryintent);
-        overridePendingTransition(R.anim.left_in,R.anim.right_out);
+        overridePendingTransition(R.anim.up_in,R.anim.down_out);
 
     }
 }

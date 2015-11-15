@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 
@@ -347,5 +348,35 @@ public class ChooseProjektActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static void open_Popup(View v,final int i, final Activity activity) {
+
+
+        PopupMenu popup = new PopupMenu(ChooseProjektActivity.CPA_activityContent,v);
+        popup.getMenuInflater().inflate(R.menu.popup_rename_delete,popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menuitem_rename: {
+
+
+                        break;
+                    }
+                    case R.id.menuitem_delete: {
+
+                        DeleteDialog(i,activity);
+
+                        break;
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        popup.show();
+
+
+    }
 }
 
