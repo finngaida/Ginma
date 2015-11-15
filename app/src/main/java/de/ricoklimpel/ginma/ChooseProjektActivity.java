@@ -37,7 +37,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
     static String Projekt_ID;
 
 
-    RecyclerView RV_projects;
+    static RecyclerView RV_projects;
     static RecyclerView.Adapter RVA_projects;
     RecyclerView.LayoutManager RVLM_projects;
 
@@ -55,13 +55,13 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
     //Bedienelemente im "Neues Projekt" Dialog
-    Button btn_AD_addproject;
-    MaterialEditText eT_AD_addproject;
+    static Button btn_AD_addproject;
+    static MaterialEditText eT_AD_addproject;
 
 
     //Shared Prefernces Manager zum Speichern und abrufen von Daten
-    SharedPreferences prefs_values;
-    SharedPreferences.Editor prefseditor_values;
+    static SharedPreferences prefs_values;
+    static SharedPreferences.Editor prefseditor_values;
 
 
     //Shared Preferences Manager zum erstellen von neuen Kategorien
@@ -186,6 +186,70 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
 
+    public static void RenameProject_AlertDialog(final int i) {
+
+        LayoutInflater AD_inflater = CPA_activityContent.getLayoutInflater();
+        View AD_View = AD_inflater.inflate(R.layout.ad_textinput_projects, null);
+
+        final AlertDialog.Builder AD_addProjectbuilder = new AlertDialog.Builder(CPA_activityContent);
+        AD_addProjectbuilder.setTitle("Projekt umbenennen");
+        AD_addProjectbuilder.setView(AD_View);
+
+        btn_AD_addproject = (Button)AD_View.findViewById(R.id.btn_AD_addprojects);
+        btn_AD_addproject.setText("speichern");
+        eT_AD_addproject = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addprojects);
+        eT_AD_addproject.setHint("neuen Projektnamen eingeben");
+
+        final AlertDialog AD_addProject = AD_addProjectbuilder.create();
+
+        btn_AD_addproject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (eT_AD_addproject.getText().toString().isEmpty()) {
+
+                    Toast.makeText(ChooseProjektActivity.CPA_activityContent,
+                            "Bitte trage einen Projektnamen ein!", Toast.LENGTH_SHORT).show();
+
+                } else if (eT_AD_addproject.getText().toString().length() > 20) {
+
+                    Toast.makeText(ChooseProjektActivity.CPA_activityContent,
+                            "Nicht mehr als 20 Zeichen!", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    renameProject(i,eT_AD_addproject.getText().toString());
+
+
+                    RVA_projects.notifyDataSetChanged();
+                    RV_projects.smoothScrollToPosition(ArrayProjectNames.size());
+
+                    AD_addProject.dismiss();
+                }
+
+            }
+        });
+
+        AD_addProject.show();
+    }
+
+    public static  void renameProject(int i, String name) {
+
+
+        ArrayProjectNames.remove(i);
+        ArrayProjectNames.add(i,name);
+
+
+        prefs_values = CPA_activityContent.getSharedPreferences("values", MODE_PRIVATE);
+        prefseditor_values = prefs_values.edit();
+
+        prefseditor_values.putString("project_names", convertToString(ArrayProjectNames));
+        prefseditor_values.commit();
+
+
+    }
+
+
     private void addProjekt() {
 
         ArrayProjectNames.add(eT_AD_addproject.getText().toString());
@@ -199,8 +263,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
 
-
-        prefs_create = this.getSharedPreferences("ID_" + String.valueOf(ArrayProjectNames.size()-1), MODE_PRIVATE);
+        prefs_create = this.getSharedPreferences("ID_" + String.valueOf(ArrayProjectNames.size() - 1), MODE_PRIVATE);
         prefseditor_create = prefs_create.edit();
 
         prefseditor_create.putString("category_names", "");
@@ -274,6 +337,14 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
 
                         ChooseProjektActivity.ArrayProjectNames.remove(i);
+
+                        prefs_values = CPA_activityContent.getSharedPreferences("values", MODE_PRIVATE);
+                        prefseditor_values = prefs_values.edit();
+
+                        prefseditor_values.putString("project_names", convertToString(ArrayProjectNames));
+                        prefseditor_values.putInt("project_quantity", ArrayProjectNames.size());
+                        prefseditor_values.commit();
+
                         RVA_projects.notifyDataSetChanged();
 
                     }
@@ -286,6 +357,8 @@ public class ChooseProjektActivity extends AppCompatActivity {
                 .setIcon(R.drawable.ic_warning_black_36dp)
                 .show();
     }
+
+
 
 
     public static  String convertToString(ArrayList<String> list) {
@@ -359,6 +432,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menuitem_rename: {
 
+                        RenameProject_AlertDialog(i);
 
                         break;
                     }

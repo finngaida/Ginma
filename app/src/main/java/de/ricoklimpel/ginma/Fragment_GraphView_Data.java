@@ -241,6 +241,8 @@ public class Fragment_GraphView_Data extends Fragment {
 
                     Fragment_GraphView_Graph.ChartReload();
 
+                    RVA_Graph_Data.notifyDataSetChanged();
+
                     AD_addData.dismiss();
 
                }

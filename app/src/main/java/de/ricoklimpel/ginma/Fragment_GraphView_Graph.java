@@ -95,16 +95,15 @@ public class Fragment_GraphView_Graph extends Fragment {
         line.setCubic(true);
         line.setHasLabels(true);
         line.setHasLines(true);
+
         line.setHasPoints(true);
 
         lines.add(line);
         data = new LineChartData(lines);
-        data.setBaseValue(0);
 
         chart1 = (LineChartView)contentView_graphview_graph.findViewById(R.id.chart);
 
         chart1.setLineChartData(data);
-        chart1.setBottom(-10);
 
 
     }

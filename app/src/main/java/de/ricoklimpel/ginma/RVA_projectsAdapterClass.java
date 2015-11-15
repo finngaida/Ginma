@@ -75,8 +75,6 @@ public class RVA_projectsAdapterClass
             @Override
             public boolean onLongClick(View v) {
 
-                //ChooseProjektActivity.DeleteDialog(i,ChooseProjektActivity.CPA_activityContent);
-
                 ChooseProjektActivity.open_Popup(v,i,ChooseProjektActivity.CPA_activityContent);
 
                 return false;
