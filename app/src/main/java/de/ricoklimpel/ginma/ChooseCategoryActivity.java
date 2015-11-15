@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -30,7 +31,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
     static Activity CCA_ActivityContent;
 
-    RecyclerView RV_categorys;
+    static RecyclerView RV_categorys;
     static RecyclerView.Adapter RVA_categorys;
     RecyclerView.LayoutManager RVLM_categorys;
 
@@ -47,13 +48,15 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 
 
     //Dialogelemente neue Kategorie erstellen
-    Button btn_AD_addcategory;
-    MaterialEditText eT_AD_addcategory;
+    static Button btn_AD_addcategory;
+    static MaterialEditText eT_AD_addcategory;
 
 
     static SharedPreferences prefs;
     static SharedPreferences.Editor prefseditor;
 
+    static SharedPreferences prefs_values;
+    static SharedPreferences.Editor prefseditor_values;
 
     Toolbar toolbar_choosecategory;
     ActionBar actionbar_choosecategory;
@@ -169,9 +172,9 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         prefseditor = prefs.edit();
 
         prefseditor.putString("category_names", convertToString(ArrayCategoryNames));
-        prefseditor.putString("dates_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
-        prefseditor.putString("values_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
-        prefseditor.putString("notes_CID_"+ String.valueOf(ArrayCategoryNames.size()-1),"");
+        prefseditor.putString("dates_CID_" + String.valueOf(ArrayCategoryNames.size() - 1), "");
+        prefseditor.putString("values_CID_" + String.valueOf(ArrayCategoryNames.size() - 1), "");
+        prefseditor.putString("notes_CID_" + String.valueOf(ArrayCategoryNames.size() - 1), "");
         prefseditor.commit();
     }
 
@@ -256,7 +259,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     }
 
 
-    private String convertToString(ArrayList<String> list) {
+    private static String convertToString(ArrayList<String> list) {
 
         StringBuilder sb = new StringBuilder();
         String delim = "";
@@ -309,4 +312,102 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         ChooseCategoryActivity.CCA_ActivityContent.startActivity(categoryintent);
         ChooseCategoryActivity.CCA_ActivityContent.overridePendingTransition(R.anim.left_in,R.anim.right_out);
     }
+
+
+    public static void open_Popup(View v,final int i, final Activity activity) {
+
+
+        PopupMenu popup = new PopupMenu(ChooseCategoryActivity.CCA_ActivityContent,v);
+        popup.getMenuInflater().inflate(R.menu.popup_rename_delete,popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menuitem_rename: {
+
+                        RenameCategory_AlertDialog(i);
+
+                        break;
+                    }
+                    case R.id.menuitem_delete: {
+
+                        DeleteDialog(i, activity);
+
+                        break;
+                    }
+                }
+
+                return false;
+            }
+        });
+
+        popup.show();
+
+
+    }
+
+
+    public static void RenameCategory_AlertDialog(final int i) {
+
+        LayoutInflater AD_inflater = CCA_ActivityContent.getLayoutInflater();
+        View AD_View = AD_inflater.inflate(R.layout.ad_textinput_categorys, null);
+
+        final AlertDialog.Builder AD_addProjectbuilder = new AlertDialog.Builder(CCA_ActivityContent);
+        AD_addProjectbuilder.setTitle("Kategorie umbenennen");
+        AD_addProjectbuilder.setView(AD_View);
+
+        btn_AD_addcategory = (Button)AD_View.findViewById(R.id.btn_AD_addcategorys);
+        btn_AD_addcategory.setText("speichern");
+        eT_AD_addcategory = (MaterialEditText)AD_View.findViewById(R.id.eT_AD_addcategorys);
+        eT_AD_addcategory.setHint("Neuen Kategorienamen eingeben");
+
+        final AlertDialog AD_addProject = AD_addProjectbuilder.create();
+
+        btn_AD_addcategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (eT_AD_addcategory.getText().toString().isEmpty()) {
+
+                    Toast.makeText(ChooseProjektActivity.CPA_activityContent,
+                            "Bitte trage einen Kategorienamen ein!", Toast.LENGTH_SHORT).show();
+
+                } else if (eT_AD_addcategory.getText().toString().length() > 20) {
+
+                    Toast.makeText(ChooseProjektActivity.CPA_activityContent,
+                            "Nicht mehr als 20 Zeichen!", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    renameCategory(i, eT_AD_addcategory.getText().toString());
+
+
+                    RVA_categorys.notifyDataSetChanged();
+                    RV_categorys.smoothScrollToPosition(ArrayCategoryNames.size());
+
+                    AD_addProject.dismiss();
+                }
+
+            }
+        });
+
+        AD_addProject.show();
+    }
+
+    public static  void renameCategory(int i, String name) {
+
+
+        ArrayCategoryNames.remove(i);
+        ArrayCategoryNames.add(i, name);
+
+
+        /*prefs_values = CCA_ActivityContent.getSharedPreferences("values", MODE_PRIVATE);
+        prefseditor_values = prefs_values.edit();
+
+        prefseditor_values.putString("project_names", convertToString(ArrayCategoryNames));
+        prefseditor_values.commit();*/
+
+
+    }
+
 }

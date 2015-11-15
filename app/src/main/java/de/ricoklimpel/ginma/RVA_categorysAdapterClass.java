@@ -74,7 +74,7 @@ public class RVA_categorysAdapterClass
             @Override
             public boolean onLongClick(View v) {
 
-                ChooseCategoryActivity.DeleteDialog(i, ChooseCategoryActivity.CCA_ActivityContent);
+                ChooseCategoryActivity.open_Popup(v,i,ChooseCategoryActivity.CCA_ActivityContent);
 
                 return false;
             }
