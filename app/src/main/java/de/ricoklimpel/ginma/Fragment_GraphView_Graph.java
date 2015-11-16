@@ -1,25 +1,27 @@
 package de.ricoklimpel.ginma;
 
 import android.graphics.Color;
-import android.graphics.PathEffect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
-import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.util.AxisAutoValues;
-import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
+
 
 /**
  * Created by ricoklimpel on 09.11.15.
@@ -85,26 +87,59 @@ public class Fragment_GraphView_Graph extends Fragment {
         {
             int Coord = i;
             values.add(new PointValue(i, Integer.valueOf(Fragment_GraphView_Data.items_values.get(i))));
+
         }
 
 
 
         Line line = new Line(values);
         line.setColor(Color.BLUE);
+        line.setPointColor(Color.DKGRAY);
         line.setFilled(true);
-        line.setCubic(true);
-        line.setHasLabels(true);
+        line.setCubic(false);
+
         line.setHasLines(true);
+        line.hasLabelsOnlyForSelected();
 
         line.setHasPoints(true);
+
 
         lines.add(line);
         data = new LineChartData(lines);
 
         chart1 = (LineChartView)contentView_graphview_graph.findViewById(R.id.chart);
-
+        chart1.setFadingEdgeLength(8);
+        chart1.setZoomEnabled(true);
+        chart1.setZoomType(ZoomType.HORIZONTAL);
+        chart1.setMaxZoom(4);
         chart1.setLineChartData(data);
 
 
+
+
+        chart1.setOnValueTouchListener(new LineChartOnValueSelectListener() {
+            @Override
+            public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
+
+            }
+
+            @Override
+            public void onValueDeselected() {
+
+            }
+        });
+
+
+    }
+
+
+    private static int maxValue(char[] chars) {
+        int max = chars[0];
+        for (int ktr = 0; ktr < chars.length; ktr++) {
+            if (chars[ktr] > max) {
+                max = chars[ktr];
+            }
+        }
+        return max;
     }
 }

@@ -48,10 +48,13 @@ public class HelpActvity extends AppCompatActivity {
                 = new ViewPagerAdapter_Help(getSupportFragmentManager());
         viewpager_help.setAdapter(viewPagerAdapter_help);
 
-        viewpager_help.setCurrentItem(1);
+        viewpager_help.setCurrentItem(0);
+        Toolbar_Help.setSubtitle("Beispiele zur Nutzung von Ginma");
 
 
         help_navigationView = (NavigationView)findViewById(R.id.help_navigationView);
+
+        help_navigationView.setCheckedItem(R.id.menuitem_examples);
 
         help_navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -62,6 +65,7 @@ public class HelpActvity extends AppCompatActivity {
                     case R.id.menuitem_examples:{
 
                         viewpager_help.setCurrentItem(0);
+                        Toolbar_Help.setSubtitle("Beispiele zur Nutzung von Ginma");
 
                         break;
                     }
@@ -69,12 +73,14 @@ public class HelpActvity extends AppCompatActivity {
 
 
                         viewpager_help.setCurrentItem(1);
+                        Toolbar_Help.setSubtitle("Hilfe zu Projekten und Kategorien");
 
                         break;
                     }
                     case R.id.menuitem_data:{
 
                         viewpager_help.setCurrentItem(2);
+                        Toolbar_Help.setSubtitle("Hilfe zur Eingabe von Daten");
 
                         break;
 
@@ -82,12 +88,14 @@ public class HelpActvity extends AppCompatActivity {
                     case R.id.menuitem_graphs:{
 
                         viewpager_help.setCurrentItem(3);
+                        Toolbar_Help.setSubtitle("Hilfe zu den Graphen");
 
                         break;
                     }
                     case  R.id.menuitem_developer:{
 
                         viewpager_help.setCurrentItem(4);
+                        Toolbar_Help.setSubtitle("Über den Entwickler");
 
                         break;
                     }
