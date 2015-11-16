@@ -1,9 +1,104 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="de.ricoklimpel.ginma.Fragment_Help_examples">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="de.ricoklimpel.ginma.Fragment_Help_examples">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="hallo ich bin fragement 1" />
 
-</FrameLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:id="@+id/CV_Helpexample_1"
+                app:cardCornerRadius="4dp"
+                android:layout_margin="10dp"
+                android:elevation="8dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="10">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iV_Help_example_1"
+                        android:background="@drawable/screenshot_examples"
+                        android:layout_weight="5"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Hier kann man einige Beispiele sehen, für die Ginma benutzt wurde. Neben dem speichern von Schulnoten und deren Verlauf ist auch beim Sport stehts verlass auf die geniale speicherung deiner Daten. Sieh dir hier an wie andere Nutzer Ginma verwendet haben um selbst auf Ideen zu kommen."
+                        android:id="@+id/tV_Help_example_1"
+                        android:layout_weight="5"
+                        android:textSize="15dp"
+                        android:layout_margin="10dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+                android:id="@+id/CV_Helpexample_2"
+                app:cardCornerRadius="4dp"
+                android:layout_margin="10dp"
+                android:elevation="8dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="10">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/iV_Help_example_2"
+                        android:background="@drawable/screenshot_katschulnoten"
+                        android:layout_weight="5"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Zum speichern von Schulnoten ist Ginma perfekt. Klausuren und Mündliche Noten können in den Kategorien eingetragen werden und mit Daten, sowie einer Punktzahl versehen werden. Es wird dann sofort zu einem Graphen umgewandelt, der dir zeigt wie du dich in der Schule so machst."
+                        android:id="@+id/tV_Help_example_2"
+                        android:layout_weight="5"
+                        android:textSize="15dp"
+                        android:layout_margin="10dp"
+                        android:gravity="center_vertical" />
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
