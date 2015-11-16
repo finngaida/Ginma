@@ -121,9 +121,8 @@ public class ChooseProjektActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ChooseProjektActivity.this, HelpActvity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                Toast.makeText(ChooseProjektActivity.this,
+                        "Diese Funktion steht zur Zeit nicht zur Verfügung", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -413,7 +412,7 @@ public class ChooseProjektActivity extends AppCompatActivity {
 
             Intent intent = new Intent(ChooseProjektActivity.this, HelpActvity.class);
             startActivity(intent);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            overridePendingTransition(R.anim.own_fade_in, R.anim.own_fade_out);
 
             return true;
         }

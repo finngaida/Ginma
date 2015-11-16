@@ -82,9 +82,8 @@ public class ChooseCategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(ChooseCategoryActivity.this, HelpActvity.class);
-                startActivity(intent);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                Toast.makeText(ChooseCategoryActivity.this,
+                        "Diese Funktion steht zur Zeit nicht zur Verfügung", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -293,7 +292,7 @@ public class ChooseCategoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_choose_projekt, menu);
+        getMenuInflater().inflate(R.menu.menu_choose_category, menu);
         return true;
     }
 
@@ -304,10 +303,16 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_settings) {
+
+        if (id == R.id.action_helpc) {
+
+            Intent intent = new Intent(ChooseCategoryActivity.this, HelpActvity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.own_fade_in, R.anim.own_fade_out);
+
             return true;
-        }*/
+        }
+
         if(id == android.R.id.home) {
             onBackPressed();
         }
