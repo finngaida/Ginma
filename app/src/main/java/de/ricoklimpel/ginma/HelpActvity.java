@@ -1,6 +1,7 @@
 package de.ricoklimpel.ginma;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -33,6 +34,8 @@ public class HelpActvity extends AppCompatActivity {
         setSupportActionBar(Toolbar_Help);
         Actionbar_Help = getSupportActionBar();
         Actionbar_Help.setDisplayHomeAsUpEnabled(true);
+        Toolbar_Help.setSubtitleTextColor(Color.WHITE);
+        Toolbar_Help.setTitleTextColor(Color.WHITE);
 
         //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         //DrawerToggle.syncState();

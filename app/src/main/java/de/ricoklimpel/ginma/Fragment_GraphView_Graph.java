@@ -99,7 +99,7 @@ public class Fragment_GraphView_Graph extends Fragment {
         line.setCubic(false);
 
         line.setHasLines(true);
-        line.hasLabelsOnlyForSelected();
+        line.setHasLabelsOnlyForSelected(true);
 
         line.setHasPoints(true);
 

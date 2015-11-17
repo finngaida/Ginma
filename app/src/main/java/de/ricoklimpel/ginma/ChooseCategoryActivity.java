@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -107,6 +108,8 @@ public class ChooseCategoryActivity extends AppCompatActivity {
         toolbar_choosecategory.setSubtitle(
                 ChooseProjektActivity.ArrayProjectNames.get(
                         Integer.valueOf(ChooseProjektActivity.Projekt_ID)));
+        toolbar_choosecategory.setSubtitleTextColor(Color.WHITE);
+        toolbar_choosecategory.setTitleTextColor(Color.WHITE);
 
         if(Build.VERSION.SDK_INT>=21){
             toolbar_choosecategory.setElevation(25);
@@ -438,3 +441,4 @@ public class ChooseCategoryActivity extends AppCompatActivity {
 //TODO Entwickler Infos gestalten: Links zu Twitter FB usw.
 //TODO Beim Kategorieerstellen einheiten angeben für die Darinliegenden Daten
 //TODO Statistiken / Graphen als Bild teilen
+//TODO alles auf Finns Weiß ändern!

@@ -2,6 +2,7 @@ package de.ricoklimpel.ginma;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -39,6 +40,8 @@ public class GraphViewActivity extends AppCompatActivity {
                 Integer.valueOf(ChooseProjektActivity.Projekt_ID))
                 + " => " + ChooseCategoryActivity.ArrayCategoryNames.get(
                 Integer.valueOf(ChooseCategoryActivity.Category_ID)));
+        toolbar_graphview.setTitleTextColor(Color.WHITE);
+        toolbar_graphview.setSubtitleTextColor(Color.WHITE);
 
         actionbar_graphview = getSupportActionBar();
         actionbar_graphview.setDisplayHomeAsUpEnabled(true);

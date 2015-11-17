@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,6 +109,8 @@ public class ChooseProjektActivity extends AppCompatActivity {
         toolbar_chooseproject = (Toolbar)findViewById(R.id.Toolbar_ChooseProject);
         setSupportActionBar(toolbar_chooseproject);
         toolbar_chooseproject.setTitle("Projekte");
+        toolbar_chooseproject.setTitleTextColor(Color.WHITE);
+
         if(Build.VERSION.SDK_INT>=21){
             toolbar_chooseproject.setElevation(25);
         }
