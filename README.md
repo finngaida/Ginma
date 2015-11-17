@@ -10,3 +10,12 @@ Alles, was ich an der UI geändert habe, die Funktionen sind die selben, wie [Ri
 - Textfarbe im TabLayout Weiß
 - Weißes Help Icon
 - Neues App Icon
+ 
+## Screenshots
+![Splash Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/1.png)    
+![Projects Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/2.png)    
+![Subjects Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/3.png)    
+![Details Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/4.png)    
+![Graph Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/5.png)    
+![Help Screen](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/6.png)    
+![Sidemenu](https://raw.github.com/finngaida/ginma/master/app/src/main/res/screenshot/7.png)    
