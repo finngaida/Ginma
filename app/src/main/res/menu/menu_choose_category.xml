@@ -6,7 +6,7 @@
 
     <item android:id="@+id/action_helpc"
         android:title="Hilfe anzeigen"
-        android:icon="@drawable/ic_help_black_36dp"
+        android:icon="@drawable/ic_help_white_36dp"
         app:showAsAction="always" />
 
 
